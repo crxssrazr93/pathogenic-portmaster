@@ -51,8 +51,9 @@ port_mounted() {
 }
 
 # After the game: how long it ran, memory and new kernel memory messages. Only when the game
-# ended with an error (westonwrap logs its exit code; 137 means it was killed, usually for lack of
-# memory) does the log also name the files to send.
+# ended with an error does the log also name the files to send. westonwrap logs the exit code:
+# 0 is a normal quit; 143 (SIGTERM) and 137 (SIGKILL) are how firmwares close a game from the
+# hotkey. A kill for lack of memory is also 137, but then the kernel logs it (caught above).
 port_exit() {
   local code oom
   port_log "game ended after ${SECONDS}s since launch"
@@ -60,7 +61,7 @@ port_exit() {
   oom="$(port_oom_lines | tail -n +$((port_oom_seen + 1)))"
   [ -n "$oom" ] && printf '%s\n' "$oom" | sed 's/^/PORT: kernel: /'
   code="$(grep -o 'exited with exit code [0-9]*' "$GAMEDIR/log.txt" 2>/dev/null | tail -n 1 | grep -o '[0-9]*$')"
-  if [ -n "$oom" ] || { [ -n "$code" ] && [ "$code" != 0 ]; }; then
+  if [ -n "$oom" ] || { case "${code:-0}" in 0|137|143) false ;; *) true ;; esac; }; then
     port_log "the game ended with an error (exit code ${code:-unknown}${oom:+, out of memory})"
     port_report
   fi

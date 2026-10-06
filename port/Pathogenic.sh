@@ -50,6 +50,10 @@ override="$CONFDIR/godot/app_userdata/Pathogenic/godot_settings_override.cfg"
 mkdir -p "$(dirname "$override")"
 grep -q "^boot_splash/stretch_mode" "$override" 2>/dev/null ||
   printf '\n[application]\n\nboot_splash/stretch_mode=2\n' >> "$override"
+# Godot only flushes print() output at exit in release builds, so the FPS lines (--print-fps)
+# would be lost when the firmware closes the game; flush every line instead.
+grep -q "^run/flush_stdout_on_print" "$override" 2>/dev/null ||
+  printf '\n[application]\n\nrun/flush_stdout_on_print=true\n' >> "$override"
 
 if [ ! -f "$GAMEDIR/gamedata/pathogenic.pck" ]; then
   pm_message "Missing pathogenic.pck. Copy it from your Steam copy of Pathogenic into ports/pathogenic/gamedata/ (see README.md)."
