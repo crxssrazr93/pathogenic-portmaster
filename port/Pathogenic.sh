@@ -36,6 +36,11 @@ weston_runtime="weston_pkg_0.2"
 # directory, so the arm64 builds sit under addons/ in the port folder.
 cd "$GAMEDIR"
 > "$GAMEDIR/log.txt" && exec > >(tee "$GAMEDIR/log.txt") 2>&1
+# Device, system and memory details for bug reports (tools/portlog.sh)
+# The files a bug report needs; named in log.txt and on screen only when something fails
+export PORT_REPORT_FILES="ports/pathogenic/log.txt and setup_log.txt"
+source "$GAMEDIR/tools/portlog.sh"
+port_header "Pathogenic launcher"
 mkdir -p "$CONFDIR"
 
 # Godot's "Keep" boot splash mode fits the height on any landscape screen, which cuts the sides
@@ -73,6 +78,8 @@ if [[ "$PM_CAN_MOUNT" != "N" ]]; then
 fi
 $ESUDO mount "$controlfolder/libs/${godot_runtime}.squashfs" "$godot_dir"
 $ESUDO mount "$controlfolder/libs/${weston_runtime}.squashfs" "$weston_dir"
+port_mounted "$godot_runtime" "$godot_dir/$godot_executable"
+port_mounted "$weston_runtime" "$weston_dir/westonwrap.sh"
 
 # Size and modification time of each file, as "stat -c '%s %Y'" prints them (muOS has no stat)
 file_stamp() {
@@ -89,13 +96,20 @@ file_stamp() {
 ui_scale="$(awk -v w="$DISPLAY_WIDTH" -v h="$DISPLAY_HEIGHT" 'BEGIN { s = w / 1920; if (h / 1080 < s) s = h / 1080; if (s > 1) s = 1; printf "%.4f", s }')"
 world_scale="$(awk -v s="$ui_scale" 'BEGIN { printf "%.4f", s / 2 }')"
 setup_stamp() { echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale"; }
+port_files gamedata/pathogenic.pck
+if [ "$(cat cache/.setup_stamp 2>/dev/null)" = "$(setup_stamp)" ]; then
+  port_log "setup: up to date"
+else
+  port_log "setup: needed (first run, game update or other screen; stamp '$(cat cache/.setup_stamp 2>/dev/null)', now '$(setup_stamp)')"
+fi
 if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
-  export GAMEDIR godot_dir godot_executable ui_scale world_scale
+  export GAMEDIR godot_dir godot_executable ui_scale world_scale controlfolder
   chmod +x "$GAMEDIR/tools/patchscript"
   export PATCHER_FILE="$GAMEDIR/tools/patchscript"
   export PATCHER_GAME="Pathogenic"
   export PATCHER_TIME="3 to 10 minutes"
   if [ -f "$controlfolder/utils/patcher.txt" ]; then
+    port_log "running the setup (tools/patchscript), its log is setup_log.txt"
     source "$controlfolder/utils/patcher.txt"
   else
     pm_message "This port requires the latest version of PortMaster."
@@ -106,7 +120,9 @@ if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
   fi
   # tools/patchscript writes the stamp only on success, from the pck as the setup left it
   if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
-    pm_message "Preparing the game failed, see ports/pathogenic/setup_log.txt."
+    port_log "setup failed"
+    port_report
+    pm_message "Preparing the game failed, see ports/pathogenic/setup_log.txt. To report it, send $PORT_REPORT_FILES."
     sleep 8
     $ESUDO umount "$godot_dir" "$weston_dir" 2>/dev/null
     pm_finish
@@ -168,12 +184,9 @@ else
 fi
 pm_platform_helper "$godot_dir/$godot_executable"
 export SDL_GAMECONTROLLERCONFIG="$godot_mapping"
+port_log "controller mapping for the game: $(printf '%s\n' "$SDL_GAMECONTROLLERCONFIG" | head -n 1)"
 
-# Device and memory at start and exit, for reports from devices that run out of memory
-mem_report() { echo "PORT_MEM ($1): $(awk '/^(MemTotal|MemAvailable|SwapTotal|SwapFree):/ { printf "%s %d MB  ", $1, $2 / 1024 }' /proc/meminfo)"; }
-echo "PORT_DEVICE: ${CFW_NAME} ${CFW_VERSION} ${DEVICE_NAME} ${DEVICE_CPU} ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}"
-mem_report start
-
+port_log "starting the game, texture scales ui $ui_scale world $world_scale"
 # The game is built for Vulkan (Forward+); handhelds run it on the Compatibility renderer.
 # SteamDeck=1 makes a new install start on the game's largest text size, which the port mod in
 # mods/ sizes for the screen; the mod also skips the live action cutscenes by default.
@@ -182,10 +195,10 @@ REAL_XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 $ESUDO env $weston_dir/westonwrap.sh headless noop kiosk crusty_x11egl \
   LD_PRELOAD= XDG_DATA_HOME="$CONFDIR" XDG_RUNTIME_DIR="$REAL_XDG_RUNTIME_DIR" SteamDeck=1 \
   "$godot_dir/$godot_executable" --resolution "${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}" -f \
-  --rendering-method gl_compatibility --rendering-driver opengl3_es --audio-driver ALSA \
+  --rendering-method gl_compatibility --rendering-driver opengl3_es --audio-driver ALSA --print-fps \
   --main-pack "$GAMEDIR/gamedata/pathogenic.pck" --mods-path="$GAMEDIR/mods"
 
-mem_report exit
+port_exit
 $ESUDO $weston_dir/westonwrap.sh cleanup
 if [[ "$PM_CAN_MOUNT" != "N" ]]; then
   $ESUDO umount "$godot_dir"

@@ -27,6 +27,10 @@ Buttons are named as the game's prompts show them. On Knulli they act as labelle
 * Textures are stored at the screen's scale on the first run, and graphics default to the cheapest options.
 * No game files are included. All changes are made on your device.
 
+## Reporting problems
+
+Please send `ports/pathogenic/log.txt` and `ports/pathogenic/setup_log.txt`. `log.txt` is rewritten on every start, so copy it right after the problem happens. Lines starting with `PORT:` list the device, firmware, screen, memory and swap, the state of the setup, and at the end how long the game ran and whether the system ran out of memory.
+
 ## Thanks
 
 Aberrant Labs and Slug Disco for the game, the Godot Engine, GodotSteam, LimboAI, Sentry and GoZen developers, Knifethrower for the PM Porting Tools, and the PortMaster team.
