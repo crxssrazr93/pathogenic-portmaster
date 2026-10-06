@@ -14,6 +14,7 @@ cd "$GAMEDIR" || exit 1
 echo "Adapting your copy of Pathogenic to this device."
 echo "This runs once (and again after a game update)."
 source "$GAMEDIR/tools/portlog.sh"
+mv -f setup_log.txt setup_log.prev.txt 2>/dev/null  # keep the previous setup's log
 port_header "Pathogenic setup" > setup_log.txt
 port_files gamedata/pathogenic.pck >> setup_log.txt
 port_log "running the Godot setup script (ui scale $ui_scale, world scale $world_scale)" >> setup_log.txt

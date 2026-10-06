@@ -25,7 +25,8 @@ trap 'rm -rf "$stage"' EXIT
 cp "$src/Pathogenic.sh" "$stage/"
 cp -r "$src/pathogenic" "$stage/"
 rm -rf "$stage"/pathogenic/gamedata/*.pck "$stage/pathogenic/cache" "$stage/pathogenic/conf" \
-  "$stage/pathogenic/log.txt" "$stage/pathogenic/setup_log.txt"
+  "$stage/pathogenic/log.txt" "$stage/pathogenic/setup_log.txt" \
+  "$stage/pathogenic/log.prev.txt" "$stage/pathogenic/setup_log.prev.txt"
 cp "$src/port.json" "$src/gameinfo.xml" "$src/screenshot.png" "$src/cover.png" "$stage/pathogenic/"
 cp "$src/README.md" "$stage/pathogenic/pathogenic.md"
 rm -f "$R/pathogenic.zip"

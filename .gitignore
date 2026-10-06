@@ -17,3 +17,4 @@ port/pathogenic/setup_log.txt
 tests/out/
 *.zip
 __pycache__/
+port/pathogenic/*.prev.txt
