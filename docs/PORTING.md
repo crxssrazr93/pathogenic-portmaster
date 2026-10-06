@@ -106,7 +106,7 @@ Log noise that is harmless: 182 RGBFloat and 48 RGBAFloat textures converted to 
 7. **Using the stock Sentry library.** There is no arm64 build, and the no-op SDK is selected only for arm32 and rv64 until the script patches arm64 in.
 8. **Debian buster as the build image.** Its gcc 8.3 and Python 3.7 cannot build godot-cpp (section 2).
 9. **Counting the sampler's RSS as the whole story.** On Mali GPUs buffers are shared memory and appear as file-rss, so the device is judged by RSS plus swap and the video memory monitor together.
-10. **Test harness pitfalls** (shared with the Dome Keeper port): always pass `--resolution`, stop Godot before Xwayland, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display.
+10. **Test harness pitfalls**: always pass `--resolution`, stop Godot before Xwayland, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display.
 
 ## 7. Still to do
 
