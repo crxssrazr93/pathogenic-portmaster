@@ -16,16 +16,6 @@ source $controlfolder/control.txt
 [ -f "${controlfolder}/mod_${CFW_NAME}.txt" ] && source "${controlfolder}/mod_${CFW_NAME}.txt"
 get_controls
 
-# Knulli names the buttons for games by position, as SDL does: "a" is the bottom button, which
-# is labelled B on these devices. Swap a/b and x/y so the buttons act as labelled, like in the
-# system menus.
-if [ "$CFW_NAME" = "knulli" ]; then
-  swap_ab() { sed -E 's/,a:/,@:/g; s/,b:/,a:/g; s/,@:/,b:/g; s/,x:/,@:/g; s/,y:/,x:/g; s/,@:/,y:/g'; }
-  export SDL_GAMECONTROLLERCONFIG="$(printf '%s\n' "$SDL_GAMECONTROLLERCONFIG" | swap_ab)"
-  swap_ab < "$SDL_GAMECONTROLLERCONFIG_FILE" > /tmp/gamecontrollerdb_ab.txt &&
-    export SDL_GAMECONTROLLERCONFIG_FILE=/tmp/gamecontrollerdb_ab.txt
-fi
-
 GAMEDIR="/$directory/ports/pathogenic"
 CONFDIR="$GAMEDIR/conf"
 godot_runtime="godot_4.7.1"
