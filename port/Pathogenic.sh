@@ -74,6 +74,13 @@ fi
 $ESUDO mount "$controlfolder/libs/${godot_runtime}.squashfs" "$godot_dir"
 $ESUDO mount "$controlfolder/libs/${weston_runtime}.squashfs" "$weston_dir"
 
+# Size and modification time of each file, as "stat -c '%s %Y'" prints them (muOS has no stat)
+file_stamp() {
+  if command -v stat >/dev/null; then stat -c '%s %Y' "$@" 2>/dev/null; return 0; fi
+  local f
+  for f in "$@"; do [ -e "$f" ] && echo "$(ls -lnL "$f" | awk '{print $5}') $(date -r "$f" +%s)"; done
+  return 0
+}
 # First run (and again after the game updates its pck, or on another screen size): adapt the
 # user's pck to this device's GPU, memory and screen. setup/port_setup.gd explains the step; it
 # skips work already done, so an interrupted run just continues next time.
@@ -81,7 +88,7 @@ $ESUDO mount "$controlfolder/libs/${weston_runtime}.squashfs" "$weston_dir"
 # design, the levels (camera zoomed out to about a third) at half that.
 ui_scale="$(awk -v w="$DISPLAY_WIDTH" -v h="$DISPLAY_HEIGHT" 'BEGIN { s = w / 1920; if (h / 1080 < s) s = h / 1080; if (s > 1) s = 1; printf "%.4f", s }')"
 world_scale="$(awk -v s="$ui_scale" 'BEGIN { printf "%.4f", s / 2 }')"
-setup_stamp() { echo "$(stat -c '%s %Y' gamedata/pathogenic.pck) $ui_scale $world_scale"; }
+setup_stamp() { echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale"; }
 if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
   export GAMEDIR godot_dir godot_executable ui_scale world_scale
   chmod +x "$GAMEDIR/tools/patchscript"
@@ -162,6 +169,11 @@ fi
 pm_platform_helper "$godot_dir/$godot_executable"
 export SDL_GAMECONTROLLERCONFIG="$godot_mapping"
 
+# Device and memory at start and exit, for reports from devices that run out of memory
+mem_report() { echo "PORT_MEM ($1): $(awk '/^(MemTotal|MemAvailable|SwapTotal|SwapFree):/ { printf "%s %d MB  ", $1, $2 / 1024 }' /proc/meminfo)"; }
+echo "PORT_DEVICE: ${CFW_NAME} ${CFW_VERSION} ${DEVICE_NAME} ${DEVICE_CPU} ${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}"
+mem_report start
+
 # The game is built for Vulkan (Forward+); handhelds run it on the Compatibility renderer.
 # SteamDeck=1 makes a new install start on the game's largest text size, which the port mod in
 # mods/ sizes for the screen; the mod also skips the live action cutscenes by default.
@@ -173,6 +185,7 @@ $ESUDO env $weston_dir/westonwrap.sh headless noop kiosk crusty_x11egl \
   --rendering-method gl_compatibility --rendering-driver opengl3_es --audio-driver ALSA \
   --main-pack "$GAMEDIR/gamedata/pathogenic.pck" --mods-path="$GAMEDIR/mods"
 
+mem_report exit
 $ESUDO $weston_dir/westonwrap.sh cleanup
 if [[ "$PM_CAN_MOUNT" != "N" ]]; then
   $ESUDO umount "$godot_dir"

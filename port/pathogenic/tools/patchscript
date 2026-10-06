@@ -3,6 +3,13 @@
 # script prints. The launcher exports GAMEDIR, godot_dir, godot_executable, ui_scale and world_scale.
 # Godot's full output goes to setup_log.txt; only the setup's own progress lines are shown
 # (the setup prints them with printerr, which Godot flushes at once, unlike print).
+# Size and modification time of each file, as "stat -c '%s %Y'" prints them (muOS has no stat)
+file_stamp() {
+  if command -v stat >/dev/null; then stat -c '%s %Y' "$@" 2>/dev/null; return 0; fi
+  local f
+  for f in "$@"; do [ -e "$f" ] && echo "$(ls -lnL "$f" | awk '{print $5}') $(date -r "$f" +%s)"; done
+  return 0
+}
 cd "$GAMEDIR" || exit 1
 echo "Adapting your copy of Pathogenic to this device."
 echo "This runs once (and again after a game update)."
@@ -14,7 +21,7 @@ echo "This runs once (and again after a game update)."
   done
 # Success is the marker file the setup writes after its last step (its exit code is not usable)
 if [ -f cache/.setup_ok ]; then
-  echo "$(stat -c '%s %Y' gamedata/pathogenic.pck) $ui_scale $world_scale" > cache/.setup_stamp
+  echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale" > cache/.setup_stamp
   echo "Done. Starting the game."
 else
   echo "Setup failed. See ports/pathogenic/setup_log.txt."
