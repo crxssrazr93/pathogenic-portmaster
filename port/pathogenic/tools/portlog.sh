@@ -18,6 +18,20 @@ port_report() {
   return 0
 }
 
+# Every input device that reports buttons: its name, the key codes and axes it has (the bitmaps
+# from sysfs) and its joystick node, which is what button mapping problems come down to
+port_pads() {
+  local ev name js
+  for ev in /sys/class/input/event*/device; do
+    [ -r "$ev/capabilities/key" ] || continue
+    name="$(cat "$ev/name" 2>/dev/null)"
+    js="$(ls -d "$ev"/js* 2>/dev/null | head -n 1)"
+    [ -n "$js" ] || continue
+    port_log "pad '$name' ($(basename "$js")): keys $(cat "$ev/capabilities/key"), abs $(cat "$ev/capabilities/abs" 2>/dev/null)"
+  done
+  return 0
+}
+
 # Device, system and memory, written once at the top of each log. $1 names the log.
 port_header() {
   local gpu="unknown"
@@ -29,6 +43,7 @@ port_header() {
   port_log "port folder $GAMEDIR, free space $(df -Ph "$GAMEDIR" 2>/dev/null | awk 'NR == 2 { print $4 }')"
   [ -n "$SDL_GAMECONTROLLERCONFIG" ] &&
     port_log "controller: $(printf '%s\n' "$SDL_GAMECONTROLLERCONFIG" | head -n 1)"
+  port_pads
   port_mem start
   port_oom_seen=$(port_oom_lines | wc -l)
 }
