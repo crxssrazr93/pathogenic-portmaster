@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gameList>
+  <game>
+    <path>./Pathogenic.sh</path>
+    <name>Pathogenic</name>
+    <desc>A cellular roguelike twin-stick shooter where you play as a disease infecting a human host. Collect organelles to evolve your parasite while battling the immune system across procedurally generated body environments.</desc>
+    <releasedate>20260716T000000</releasedate>
+    <developer>Aberrant Labs</developer>
+    <publisher>Slug Disco</publisher>
+    <genre>Action</genre>
+    <image>./pathogenic/cover.png</image>
+  </game>
+</gameList>

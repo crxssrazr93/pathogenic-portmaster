@@ -1,0 +1,19 @@
+# Libraries: fetched by build/fetch_plugins.sh, built by build/sentry/build.sh and build/gozen/build.sh
+port/pathogenic/addons/
+# The port mod zip, built from mod/ by build/package.sh
+port/pathogenic/mods/
+build/sentry/src/
+build/sentry/*.so
+build/gozen/gde_gozen/
+build/gozen/out/
+build/*.log
+# Game files and files the first run creates are never part of the repo
+port/pathogenic/gamedata/*.pck
+port/pathogenic/cache/
+port/pathogenic/conf/
+port/pathogenic/log.txt
+port/pathogenic/setup_log.txt
+# Test output and packages
+tests/out/
+*.zip
+__pycache__/

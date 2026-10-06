@@ -1,0 +1,1 @@
+Copy pathogenic.pck from the Steam Linux build of Pathogenic into this folder. See the README.

@@ -1,0 +1,19 @@
+{
+	"name": "Handheld",
+	"namespace": "PortMaster",
+	"version_number": "1.0.0",
+	"website_url": "https://portmaster.games/",
+	"description": "PortMaster port changes for small handheld screens and 1 GB devices: text sized for the screen, live action cutscenes skipped by default, no boot shader cache, whole menu logo on 4:3.",
+	"dependencies": [],
+	"extra": {
+		"godot": {
+			"authors": ["crxssrazr93"],
+			"compatible_mod_loader_version": ["7.0.1"],
+			"compatible_game_version": [],
+			"incompatibilities": [],
+			"load_before": [],
+			"tags": [],
+			"config_schema": {}
+		}
+	}
+}

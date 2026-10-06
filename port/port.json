@@ -1,0 +1,45 @@
+{
+    "version": 4,
+    "name": "pathogenic.zip",
+    "items": [
+        "Pathogenic.sh",
+        "pathogenic"
+    ],
+    "items_opt": [],
+    "attr": {
+        "title": "Pathogenic",
+        "porter": [
+            "crxssrazr93"
+        ],
+        "desc": "A cellular roguelike twin-stick shooter where you play as a disease infecting a human host. Collect organelles to evolve your parasite while battling the immune system across procedurally generated body environments.",
+        "desc_md": null,
+        "inst": "Purchase the game on Steam and copy pathogenic.pck from the game's installation folder (Steam: Manage, Browse local files) into ports/pathogenic/gamedata/. The first start prepares the game for your device, which takes a few minutes and needs up to about 1 GB of extra space (about 150 MB at 640x480, more on bigger screens).",
+        "inst_md": "Purchase the game on [Steam](https://store.steampowered.com/app/3808690/Pathogenic/) and copy `pathogenic.pck` from the game's installation folder (Steam: Manage, Browse local files) into `ports/pathogenic/gamedata/`. The first start prepares the game for your device, which takes a few minutes and needs up to about 1 GB of extra space (about 150 MB at 640x480, more on bigger screens).",
+        "genres": [
+            "action",
+            "arcade"
+        ],
+        "image": null,
+        "rtr": false,
+        "exp": false,
+        "runtime": [
+            "godot_4.7.1.squashfs",
+            "weston_pkg_0.2.squashfs"
+        ],
+        "store": [
+            {
+                "name": "Steam",
+                "gameurl": "https://store.steampowered.com/app/3808690/Pathogenic/",
+                "developerurl": "https://pathogenicgame.com/"
+            }
+        ],
+        "availability": "paid",
+        "reqs": [
+            "2gb"
+        ],
+        "arch": [
+            "aarch64"
+        ],
+        "min_glibc": ""
+    }
+}

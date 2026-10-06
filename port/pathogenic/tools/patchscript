@@ -1,0 +1,21 @@
+#!/bin/bash
+# First run setup, run by PortMaster's patcher (utils/patcher.txt), which shows each line this
+# script prints. The launcher exports GAMEDIR, godot_dir, godot_executable, ui_scale and world_scale.
+# Godot's full output goes to setup_log.txt; only the setup's own progress lines are shown
+# (the setup prints them with printerr, which Godot flushes at once, unlike print).
+cd "$GAMEDIR" || exit 1
+echo "Adapting your copy of Pathogenic to this device."
+echo "This runs once (and again after a game update)."
+"$godot_dir/$godot_executable" --headless --main-pack gamedata/pathogenic.pck \
+  --script res://setup/port_setup.gd -- --out="$GAMEDIR" --pck="$GAMEDIR/gamedata/pathogenic.pck" \
+  --ui-scale="$ui_scale" --world-scale="$world_scale" 2>&1 \
+  | tee setup_log.txt | while IFS= read -r line; do
+    case "$line" in PORT_SETUP:*) echo "${line#PORT_SETUP: }" ;; esac
+  done
+# Success is the marker file the setup writes after its last step (its exit code is not usable)
+if [ -f cache/.setup_ok ]; then
+  echo "$(stat -c '%s %Y' gamedata/pathogenic.pck) $ui_scale $world_scale" > cache/.setup_stamp
+  echo "Done. Starting the game."
+else
+  echo "Setup failed. See ports/pathogenic/setup_log.txt."
+fi

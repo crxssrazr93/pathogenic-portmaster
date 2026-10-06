@@ -1,0 +1,5 @@
+addons/godotsteam/linuxarm64/libsteam_api.so is Valve's Steamworks SDK redistributable library
+(Steamworks SDK 1.64), shipped unchanged inside the official GodotSteam 4.19.1 GDExtension
+release and covered by the Steamworks SDK Access Agreement: https://partner.steamgames.com/
+It is not part of this repository. build/fetch_plugins.sh downloads it from the GodotSteam release.
+On a handheld there is no Steam client, so it only lets the game's Steam calls fail quietly.
