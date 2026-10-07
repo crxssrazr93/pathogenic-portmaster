@@ -43,6 +43,9 @@ Notes on the GoZen build:
 * **Boot splash.** Godot's "Keep" splash mode fits the height and cuts the sides off a 16:9 splash on 4:3 screens, so the launcher adds `boot_splash/stretch_mode=2` (Keep Width) to the game's own override file in `conf/` whenever it is missing.
 * **Level start map.** `bodymap.gd` pans the map by the viewport height times a position keyed for 1080. On 4:3 (1920x1440) the map is pushed up, leaving black below. A script extension of `bodymap.gd` broke the level config preloads (it loads them before the game is ready), so the mod instead scales the animation's pan keys when the node is added.
 * **Main menu.** The slime background simulates in a SubViewport shaped like the screen and its logo fills it, which cuts the logo at both sides on 4:3. The mod keeps it to a centred 16:9 band there, and on screens up to 720 high runs the feedback shader at a quarter of the UI resolution (it made the menu lag).
+* **Camera.** The game's own Camera Zoom option is set once, on a new install, so the play area is as large as on an 800 wide screen: 1.25 at 640x480 (picked on the RG35XX H after trying 1.5 and 1.75), 1.11 at 720x720, unchanged from 800 wide up. Fewer objects are on screen too.
+* **HUD.** On small screens the room minimap (top right) is drawn 1.75 times larger and more opaque, the body overview (top left) 1.4 times, and the DNA and health bars and the stamina wheel 1.5 times, each as a fraction of its design size on screen. The bars sit in a MarginContainer whose layout resets their scale, so it is set again after every sort. The minimap goes back to its own size while it is expanded to the full screen.
+* **Cell selection.** The description box at the top is white text on a light panel: drawn 1.3 times larger, with a dark outline.
 * **Buttons.** Knulli names buttons for games by position as SDL does (a is the bottom button, labelled B on these devices), the same for every port. The launcher leaves that as it is: Knulli has its own per game A/B swap, and swapping in the launcher as well flipped the buttons twice for players who use it, and the wrong way on devices whose bottom button is labelled A. Godot also numbers joypad buttons differently from SDL on pads that report extra keys, so the launcher renumbers the SDL mapping for Godot from the pad's key bitmap. gptokeyb only supplies the exit hotkey, since the game reads the pad itself.
 
 Pad actions in the game's input map, as Godot joypad buttons: A accept and interact, B cancel, X activate, Y select and second ability, R1 shoot and next tab, L1 dodge and previous tab, R2 secondary shot, L2 minimap, Select pause, Start editor, left stick move, right stick aim.
@@ -82,20 +85,41 @@ Result at 640x480 on the PC: cache 959 MB down to 147 MB, setup 14 s, first leve
 
 ### 4.4 Graphics defaults
 
-The mod's `globals.gd` extension sets handheld defaults only for keys the player has not set: lighting on the player only, environment and post processing low, physics accuracy off, no foreground parallax, a 30 fps cap and no HDR 2D (its 16-bit float buffers are slow on handheld GPUs, and there is no glow that needs it). Live action cutscenes are skipped by default because the 1080p HEVC videos are too heavy to decode on a handheld CPU. The player can turn them back on in the options.
+The mod's `globals.gd` extension sets handheld defaults only for keys the player has not set: no lighting (section 5), environment and post processing low, physics accuracy off, no foreground parallax, a 30 fps cap and no HDR 2D (its 16-bit float buffers are slow on handheld GPUs, and there is no glow that needs it). Live action cutscenes are skipped by default because the 1080p HEVC videos are too heavy to decode on a handheld CPU. The player can turn them back on in the options.
 
 Log noise that is harmless: 182 RGBFloat and 48 RGBAFloat textures converted to half floats (Mali), 44 "Too many instances using shader instance variables" (`secret_text.gd`, a 1024 buffer on this GPU), and one "Cannot get class 'DisabledBreadcrumb'" from the no-op Sentry.
 
-## 5. Results
+## 5. Frame rate
+
+Measured on the RG35XX H with the test only probe mod (`tests/probe/`), which logs the frame time, script and physics time, draw calls and active physics bodies every 2 seconds. Once a level is up it runs phases of 8 seconds that hide part of the scene, stop a script or turn off a SubViewport, alternating with unchanged phases. Fights were measured with the game's own `--stress-test` harness (a seeded run with hordes of 12 to 35 enemies kept alive), which gives the same fight every time. The screen's vsync cannot be turned off on this device, so frame rates step between 30, 20 and 15 fps; a part shows up in a phase only when it moves the frame across one of those steps.
+
+| Change | Where | Before | After |
+|--|--|--|--|
+| Main menu slime simulation at an eighth of the UI resolution, stepped every second frame (`slime_shader.gd`) | Main menu | 9.5 fps | 23 to 25 fps |
+| SubViewports rendered at the size they are shown (below) | Body editor | 5 fps | 25 to 30 fps |
+| No lighting by default | Quiet room | 17 fps | 26 fps |
+| Minimaps redrawn every second frame | Quiet room | 26 fps | 30 fps (the cap) |
+| At most 2 physics steps a frame | Stress test hordes | 5 fps | 15 fps |
+| All of the above | First fight of a run | 9 to 15 fps (player report) | about 24 fps |
+
+* **Lighting.** The light around the player, the one light left on the game's "player only" setting, cost about 20 ms a frame on the Compatibility renderer. The rooms look nearly the same without it. Installs that already had "player only" saved are moved to "none" once; the player can turn it back on.
+* **Physics steps.** The game allows 6 physics steps a frame. In a big fight one step takes about as long as a tick, and the game settled at 6 steps every frame: 5 fps, still in real time. With at most 2 the same fight runs at 15 fps, in real time down to 15 fps and in slow motion only below that. Physics runs at 30 ticks a second instead of 60.
+* **Minimaps.** The room map and the body overview each draw the whole level again through their own SubViewport (about 4 ms a frame). They are redrawn every second frame, every frame while the map is expanded, and not at all while hidden.
+* **SubViewports.** Offscreen views (minimaps, the body editor, the DNA panels, the menu's CRT screen) render at their 1920x1080 or 1920x1440 design size and are then shown at a third of that. Each one shown through a SubViewportContainer now renders at the size it is shown: the container stretches it and divides its resolution by the screen's whole factor (3 at 640x480, 2 at 720x720), and `size_2d_override` keeps the content laid out at the design size, input included. Viewports with their own 3D camera keep their size, since `Camera3D.unproject_position` uses the override. They also drop HDR 2D.
+* **Light motes.** The ambient light particles (`particle_light*.tscn`) are the largest group of emitters, about 135 in a level and each its own GPU pass: two of every three are removed.
+
+What did not move the frame rate in a quiet room: stopping `hair.gd`, `blood_stream.gd`, `connection.gd`, the vitals graphs or the parallax sprites, hiding the HUD, hiding all 182 particle emitters, 20 physics ticks a second, and the background mask viewport (about 2 ms). Switching off the player's CanvasGroup saves about 2 ms, but the game tints it for every hit flash and dodge, and `player.gd` declares a global class, which a script extension cannot replace, so it stays.
+
+## 6. Results
 
 | Item | Result |
 |--|--|
 | All four extensions on the device | Load (GodotSteam reports no running Steam, the game carries on) |
 | Setup on the RG35XX H | About 4 minutes, then shown only when the pck or screen size changes |
 | Boot on the RG35XX H | About 95 s to 2 minutes before the mods are ready |
-| Gameplay on the RG35XX H | Runs, but levels lag. 2 GB of RAM or more is recommended. |
+| Gameplay on the RG35XX H | Quiet rooms at the 30 fps cap, the first fights at about 24 fps, the stress test hordes at 15 fps (section 5) |
 
-## 6. What failed or was dropped, and why
+## 7. What failed or was dropped, and why
 
 1. **Libraries in `addons/` folders only.** Godot does not find them by `res://` path through the pack; the working directory relative path or the executable directory are the two places that work (section 2).
 2. **Original boot warm up on the device.** Runs out of memory, see 4.1 and 4.2.
@@ -106,10 +130,13 @@ Log noise that is harmless: 182 RGBFloat and 48 RGBAFloat textures converted to 
 7. **Using the stock Sentry library.** There is no arm64 build, and the no-op SDK is selected only for arm32 and rv64 until the script patches arm64 in.
 8. **Debian buster as the build image.** Its gcc 8.3 and Python 3.7 cannot build godot-cpp (section 2).
 9. **Counting the sampler's RSS as the whole story.** On Mali GPUs buffers are shared memory and appear as file-rss, so the device is judged by RSS plus swap and the video memory monitor together.
-10. **Test harness pitfalls**: always pass `--resolution`, stop Godot before Xwayland, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display.
+10. **A script extension of `editor.gd`.** The script declares a global class (`Editor`), and the extension broke other scripts that use the class ("hides a global script class"). The mod corrects the editor from its own `_physics_process` instead.
+11. **Driving the player with injected stick events on the device.** Buttons injected into the controller's evdev node work, but the driver keeps reporting the real stick, so the probe holds input actions instead (`/tmp/probe_cmd`).
+12. **Test harness pitfalls**: always pass `--resolution`, stop Godot before Xwayland, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display.
 
-## 7. Still to do
+## 8. Still to do
 
 * A device with 2 GB of RAM or more has not been tested.
-* Performance on the H700: levels lag. A frame time breakdown was not done.
+* Boot still takes about two minutes on the H700.
+* Late levels and bosses have not been measured.
 * Some text is still small in places.

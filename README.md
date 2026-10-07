@@ -6,7 +6,7 @@ The port runs the game's own `pathogenic.pck` on PortMaster's stock Godot 4.7.1 
 
 | | |
 |--|--|
-| Status | Boots, menus, controls and levels work on an Anbernic RG35XX H (Knulli, H700, Mali G31, 1 GB RAM), where it is slow: boot about 2 minutes, levels lag |
+| Status | Boots, menus, controls and levels work on an Anbernic RG35XX H (Knulli, H700, Mali G31, 1 GB RAM): boot about 2 minutes, quiet rooms at 30 fps, fights at about 15 to 24 fps |
 | Target | aarch64 PortMaster devices (Knulli, muOS, ROCKNIX, ArkOS and others) with 2 GB RAM or more |
 | Runtimes | `godot_4.7.1`, Westonpack (`weston_pkg_0.2`) |
 | Tested game version | Steam Linux build, pck 1.44 GB (Godot 4.7 stable) |
@@ -37,7 +37,7 @@ The game is a Forward+ (Vulkan) export, which handhelds cannot run, so the launc
 
 * **GDExtensions.** The game needs GodotSteam, LimboAI (enemy AI), GoZen (video) and sentry-godot, and ships only x86_64 builds. The port carries arm64 builds: official releases of GodotSteam 4.19.1 and LimboAI 1.8.0, Sentry 1.6.0 built as the no-op variant, and GoZen (commit b852674) built with FFmpeg 7.1 for decoding only. Godot opens them relative to the working directory, so they sit under `addons/` in the port folder.
 * **First start setup** (`port/pathogenic/setup/port_setup.gd`) rewrites all 3226 textures into a cache at the size they are drawn at on your screen (the UI at the screen's scale of its 1920x1080 design, the levels at half that) and repoints the pack's `.import` entries to them. The pack is patched in place, so nothing from the game leaves your device.
-* **Port mod** (`mod/`, zipped into `mods/` by `build/package.sh`): text sized for small screens, graphics defaults set to the cheapest options, live action cutscenes off by default, no boot shader caching, and a fix for the level start map on 4:3 screens.
+* **Port mod** (`mod/`, zipped into `mods/` by `build/package.sh`): text and HUD sized for small screens, the camera zoomed in on them, graphics defaults set to the cheapest options (no lighting), offscreen views rendered at the size they are shown, minimaps redrawn every second frame, at most 2 physics steps a frame, live action cutscenes off by default, no boot shader caching, and a fix for the level start map on 4:3 screens.
 * **Controller mapping** (in the launcher): Godot numbers joypad buttons differently from SDL on pads that also report keys such as volume or Esc, so the launcher renumbers PortMaster's SDL mapping for Godot. Buttons work by position (A is the bottom button); on Knulli the A/B layout is set per game in the ports list.
 
 The full story, with measurements and every approach that failed, is in [docs/PORTING.md](docs/PORTING.md).
@@ -74,12 +74,12 @@ export GODOT=/path/to/godot_4.7.1/godot471.x86_64 GAMEDIR=/path/to/folder/with/p
 tests/localtest.sh 640x480 "wait 30; shot menu; press A; wait 20; shot level" menu
 ```
 
-Each run prints whether the game was still alive and its peak memory, and writes screenshots, the game log and a memory trace to `tests/out/<tag>/`. `tests/vpad.py` documents the step syntax. `tests/probe/` is a test only mod that logs Godot's memory monitors (zip its `mods-unpacked` folder and pass `EXTRA="--mods-path=<folder>"`).
+Each run prints whether the game was still alive and its peak memory, and writes screenshots, the game log and a memory trace to `tests/out/<tag>/`. `tests/vpad.py` documents the step syntax. `tests/probe/` is a test only mod that logs Godot's memory and frame time monitors, and in a level runs phases that hide or stop parts of the scene to show what each costs (zip its `mods-unpacked` folder and pass `EXTRA="--mods-path=<folder>"`, or put the zip in `mods/` on a device).
 
 ## Known limitations
 
 * Online features (Steam) are unavailable.
-* On 1 GB devices (H700) boot takes about two minutes and levels lag. 2 GB or more is recommended.
+* On 1 GB devices (H700) boot takes about two minutes, and big fights drop to about 15 fps. 2 GB or more is recommended.
 * Live action cutscenes are off by default because the 1080p HEVC videos are too heavy.
 * Particle trails are not supported by the Compatibility renderer.
 * The title logo is cut at the sides on 4:3 screens.

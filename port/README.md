@@ -23,9 +23,9 @@ Buttons are named as the game's prompts show them. They work by position, as SDL
 ## Notes
 
 * On 1 GB devices turn on zram (or swap) in your firmware's settings, so the game does not run out of memory.
-* Needs a device with 2 GB of RAM or more for smooth play. On 1 GB H700 devices it runs, but boot takes about two minutes and levels lag.
+* Needs a device with 2 GB of RAM or more for smooth play. On 1 GB H700 devices it runs, but boot takes about two minutes and big fights drop to about 15 fps.
 * Live action cutscenes are off by default (they can be enabled in the options, but are heavy).
-* Textures are stored at the screen's scale on the first run, and graphics default to the cheapest options.
+* Textures are stored at the screen's scale on the first run, and graphics default to the cheapest options (lighting off). On small screens the camera is zoomed in and the HUD drawn larger; Camera Zoom in the options changes the zoom.
 * No game files are included. All changes are made on your device.
 
 ## Reporting problems
