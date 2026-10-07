@@ -126,6 +126,29 @@ if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
   fi
 fi
 
+# The input device a mapping line is for. By its SDL GUID first (bus, vendor, product and version,
+# little endian; current SDL keeps a CRC of the name in bytes 2 and 3, so those are skipped): the
+# mapping's name need not be the device's (muOS maps its "muOS-Keys" pad as "Deeplay-keys"). Only
+# joysticks count, since key devices such as gpio-keys can report the same ids. Then by name, then
+# the only joystick with buttons.
+mapping_pad() {
+  local guid="${1%%,*}" name="${1#*,}" ev id pads=()
+  name="${name%%,*}"
+  le16() { local v=$((16#$(cat "$1" 2>/dev/null || echo 0))); printf '%02x%02x' $((v & 255)) $((v >> 8 & 255)); }
+  for ev in /sys/class/input/event*/device; do
+    [ -d "$ev/id" ] && ls -d "$ev"/js* >/dev/null 2>&1 || continue
+    id="$(le16 "$ev/id/bustype")0000$(le16 "$ev/id/vendor")0000$(le16 "$ev/id/product")0000$(le16 "$ev/id/version")0000"
+    [ "${id:0:4}${id:8}" = "${guid:0:4}${guid:8}" ] && { echo "$ev"; return; }
+  done
+  for ev in /sys/class/input/event*/device; do
+    [ "$(cat "$ev/name" 2>/dev/null)" = "$name" ] && { echo "$ev"; return; }
+  done
+  for ev in /sys/class/input/event*/device; do
+    ls -d "$ev"/js* >/dev/null 2>&1 || continue
+    [ -n "$(cat "$ev/capabilities/key" 2>/dev/null)" ] && pads+=("$ev")
+  done
+  [ ${#pads[@]} -eq 1 ] && echo "${pads[0]}"
+}
 # Godot numbers joypad buttons from BTN_JOYSTICK (0x120) upwards, then BTN_MISC to BTN_JOYSTICK,
 # and skips lower key codes. SDL numbers every key code in ascending order, so on pads that also
 # report keys like volume or Esc the SDL mapping's bN indices point at the wrong buttons in Godot.
@@ -133,9 +156,7 @@ fi
 godot_joy_mapping() {
   local mapping="$1" name="${1#*,}" dev="" ev wbits=64 n i b w code
   name="${name%%,*}"
-  for ev in /sys/class/input/event*/device; do
-    [ "$(cat "$ev/name" 2>/dev/null)" = "$name" ] && { dev="$ev"; break; }
-  done
+  dev="$(mapping_pad "$mapping")"
   [ -n "$dev" ] || { echo "$mapping"; return; }
   case "$(uname -m)" in aarch64|x86_64) ;; *) wbits=32 ;; esac
   local words=($(cat "$dev/capabilities/key")) codes=()
