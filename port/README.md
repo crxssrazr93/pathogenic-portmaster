@@ -22,6 +22,7 @@ Buttons are named as the game's prompts show them. They work by position, as SDL
 
 ## Notes
 
+* On 1 GB devices turn on zram (or swap) in your firmware's settings, so the game does not run out of memory.
 * Needs a device with 2 GB of RAM or more for smooth play. On 1 GB H700 devices it runs, but boot takes about two minutes and levels lag.
 * Live action cutscenes are off by default (they can be enabled in the options, but are heavy).
 * Textures are stored at the screen's scale on the first run, and graphics default to the cheapest options.
