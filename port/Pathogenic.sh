@@ -1,4 +1,5 @@
 #!/bin/bash
+# PORTMASTER: pathogenic.zip, Pathogenic.sh
 
 XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
@@ -187,12 +188,19 @@ godot_joy_mapping() {
   echo "$out"
 }
 
-# Only Godot gets the renumbered mapping (exported after gptokeyb starts, since gptokeyb is an
-# SDL program). westonwrap evals its arguments, so a value with spaces cannot be passed there.
+# The game reads the pads itself (Godot joypad input), each pad as its own player. The built in pad
+# gets PortMaster's mapping for the device, renumbered for Godot's button order; other pads use
+# Godot's own controller database. The mapping goes to the game as a westonwrap VAR=value argument:
+# westonwrap sources PortMaster's control.txt again, which on some firmwares (muOS) exports the
+# original mapping over anything exported here. westonwrap evals its arguments, so the mapping is
+# one line and the spaces in its name (only the GUID is matched) become dots.
 godot_mapping=""
 while IFS= read -r line; do
-  [ -n "$line" ] && godot_mapping+="$(godot_joy_mapping "$line")"$'\n'
+  [ -n "$line" ] || continue
+  godot_mapping="$(godot_joy_mapping "$line")"
+  break
 done <<< "$SDL_GAMECONTROLLERCONFIG"
+godot_mapping="$(printf '%s' "$godot_mapping" | tr ' ' '.')"
 
 if [ "$CFW_NAME" = "muOS" ] && [ -n "$GPTOKEYB2" ]; then
   $GPTOKEYB2 "$godot_executable" -c "$GAMEDIR/pathogenic.gptk" &
@@ -200,8 +208,7 @@ else
   $GPTOKEYB "$godot_executable" -c "$GAMEDIR/pathogenic.gptk" &
 fi
 pm_platform_helper "$godot_dir/$godot_executable"
-export SDL_GAMECONTROLLERCONFIG="$godot_mapping"
-port_log "controller mapping for the game: $(printf '%s\n' "$SDL_GAMECONTROLLERCONFIG" | head -n 1)"
+port_log "controller mapping for the game: ${godot_mapping:-none}"
 
 port_log "starting the game, texture scales ui $ui_scale world $world_scale"
 # The game is built for Vulkan (Forward+); handhelds run it on the Compatibility renderer.
@@ -210,7 +217,7 @@ port_log "starting the game, texture scales ui $ui_scale world $world_scale"
 # westonwrap replaces XDG_RUNTIME_DIR; pass the real one on so ALSA can reach PipeWire for sound.
 REAL_XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 $ESUDO env $weston_dir/westonwrap.sh headless noop kiosk crusty_x11egl \
-  LD_PRELOAD= XDG_DATA_HOME="$CONFDIR" XDG_RUNTIME_DIR="$REAL_XDG_RUNTIME_DIR" SteamDeck=1 \
+  LD_PRELOAD= ${godot_mapping:+SDL_GAMECONTROLLERCONFIG="$godot_mapping"} XDG_DATA_HOME="$CONFDIR" XDG_RUNTIME_DIR="$REAL_XDG_RUNTIME_DIR" SteamDeck=1 \
   "$godot_dir/$godot_executable" --resolution "${DISPLAY_WIDTH}x${DISPLAY_HEIGHT}" -f \
   --rendering-method gl_compatibility --rendering-driver opengl3_es --audio-driver ALSA --print-fps \
   --main-pack "$GAMEDIR/gamedata/pathogenic.pck" --mods-path="$GAMEDIR/mods"
