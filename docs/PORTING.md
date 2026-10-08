@@ -135,6 +135,10 @@ What did not move the frame rate in a quiet room: stopping `hair.gd`, `blood_str
 11. **Driving the player with injected stick events on the device.** Buttons injected into the controller's evdev node work, but the driver keeps reporting the real stick, so the probe holds input actions instead (`/tmp/probe_cmd`).
 12. **Test harness pitfalls**: always pass `--resolution`, stop Godot before Xwayland, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display.
 
+### Texture cache after game updates
+
+Converted textures are named after Godot's imported file, which is named after the texture's path, so a game update that changes a texture kept the name and the old pixels were reused. Each cached texture now has `<name>.src` with the MD5 the pack's directory records for its original; a different MD5 converts it again. The launcher also runs the setup when `cache/textures/` is missing even though the stamp matches. Tested on the PC (a rerun reuses all 3226, five changed originals convert those five, a fresh copy of the same pck reuses all) and on the RG35XX H (`cache/textures/` removed: setup ran, 3226 converted in 295 s, title screen). Installs from older releases convert every texture once more on their next setup run, since their cache has no `.src` files.
+
 ## 8. Still to do
 
 * A device with 2 GB of RAM or more has not been tested.

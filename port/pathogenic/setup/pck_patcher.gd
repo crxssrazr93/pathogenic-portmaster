@@ -42,6 +42,13 @@ func read(path: String) -> PackedByteArray:
 	file.seek(off + (base if relative else 0))
 	return file.get_buffer(size)
 
+## The MD5 the directory records for a file, as hex ("" when the pack has no such file).
+func md5(path: String) -> String:
+	if not entries.has(path):
+		return ""
+	file.seek(entries[path] + 16)
+	return file.get_buffer(16).hex_encode()
+
 func replace(path: String, data: PackedByteArray) -> void:
 	file.seek_end()
 	var end := file.get_position()

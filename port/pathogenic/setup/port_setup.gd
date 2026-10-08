@@ -189,7 +189,15 @@ func convert_textures() -> bool:
 		var name := imported.get_file()
 		var target := out_dir.path_join(CACHE + "/" + name)
 		var size: Vector2i = ctex["size"]
-		if not FileAccess.file_exists(target):
+		# The cached file is named after the texture's path, so a game update that changes the
+		# art keeps the name; <name>.src holds the MD5 of the original it was made from (from
+		# the pack's directory), and a different one makes it again
+		var src_md5 := pck.md5(imported.trim_prefix("res://"))
+		if src_md5 == "":
+			src_md5 = pck.md5(imported)
+		var cached_ok := FileAccess.file_exists(target) and (src_md5 == ""
+			or FileAccess.get_file_as_string(target + ".src").strip_edges() == src_md5)
+		if not cached_ok:
 			var img := decode_ctex(imported, ctex)
 			if img == null:
 				printerr("PORT_SETUP: skipped %s (unsupported format)" % job[0])
@@ -212,6 +220,8 @@ func convert_textures() -> bool:
 				push_error("cannot write " + target)
 				return false
 			DirAccess.rename_absolute(target + ".tmp", target)
+			if src_md5 != "":
+				FileAccess.open(target + ".src", FileAccess.WRITE).store_string(src_md5 + "\n")
 			stored += img.get_data().size()
 			done += 1
 		else:

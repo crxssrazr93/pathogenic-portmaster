@@ -93,13 +93,15 @@ file_stamp() {
 ui_scale="$(awk -v w="$DISPLAY_WIDTH" -v h="$DISPLAY_HEIGHT" 'BEGIN { s = w / 1920; if (h / 1080 < s) s = h / 1080; if (s > 1) s = 1; printf "%.4f", s }')"
 world_scale="$(awk -v s="$ui_scale" 'BEGIN { printf "%.4f", s / 2 }')"
 setup_stamp() { echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale"; }
+# done: the stamp matches and the converted textures are still there
+setup_done() { [ -d cache/textures ] && [ "$(cat cache/.setup_stamp 2>/dev/null)" = "$(setup_stamp)" ]; }
 port_files gamedata/pathogenic.pck
-if [ "$(cat cache/.setup_stamp 2>/dev/null)" = "$(setup_stamp)" ]; then
+if setup_done; then
   port_log "setup: up to date"
 else
-  port_log "setup: needed (first run, game update or other screen; stamp '$(cat cache/.setup_stamp 2>/dev/null)', now '$(setup_stamp)')"
+  port_log "setup: needed (first run, game update, other screen or textures missing; stamp '$(cat cache/.setup_stamp 2>/dev/null)', now '$(setup_stamp)', textures $([ -d cache/textures ] && echo present || echo missing))"
 fi
-if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
+if ! setup_done; then
   export GAMEDIR godot_dir godot_executable ui_scale world_scale controlfolder
   chmod +x "$GAMEDIR/tools/patchscript"
   export PATCHER_FILE="$GAMEDIR/tools/patchscript"
@@ -116,7 +118,7 @@ if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
     exit 1
   fi
   # tools/patchscript writes the stamp only on success, from the pck as the setup left it
-  if [ "$(cat cache/.setup_stamp 2>/dev/null)" != "$(setup_stamp)" ]; then
+  if ! setup_done; then
     port_log "setup failed"
     port_report
     pm_message "Preparing the game failed, see ports/pathogenic/setup_log.txt. To report it, send $PORT_REPORT_FILES."
