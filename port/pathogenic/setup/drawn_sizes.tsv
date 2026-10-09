@@ -1,0 +1,806 @@
+# Drawn sizes of textures, measured in the game (docs/PORTING.md, build/make_drawn_table.py).
+# res://path, TAB, k: screen pixels per texture pixel at the 1920x1080 design size.
+res://gfx/amoeba_skilltree.png	1.36
+res://gfx/bacteria_skilltree.png	1.37
+res://gfx/cloud.png	1.06
+res://gfx/cloud2.png	0.73
+res://gfx/collector_skilltree.png	1.36
+res://gfx/core_chest.png	5.85
+res://gfx/core_chest_heightmap_n.png	0.81
+res://gfx/cursed_chest.png	5.68
+res://gfx/cursed_chest_heightmap_n.png	0.77
+res://gfx/diatom_skilltree.png	1.43
+res://gfx/enemies/Shot.png	1.04
+res://gfx/enemies/Shot_heartbeat.png	1.04
+res://gfx/enemies/T-Cells/T-Cell1/tcell1_tentacle.png	0.52
+res://gfx/enemies/T-Cells/T-Cell1/tcell1_tentacle_heightmap_n.png	0.52
+res://gfx/enemies/_base/enemy_gib1.png	2.04
+res://gfx/enemies/_base/enemy_gib2.png	2.06
+res://gfx/enemies/_base/enemy_gib3.png	1.96
+res://gfx/enemies/_base/enemy_gib4.png	2.15
+res://gfx/enemies/_base/enemy_gib5.png	2.03
+res://gfx/enemies/_base/enemy_gib6.png	1.91
+res://gfx/enemies/_base/enemy_gib7.png	2.60
+res://gfx/enemies/antibody/antibody_body.png	0.61
+res://gfx/enemies/antibody/antibody_body_heightmap_n.png	0.61
+res://gfx/enemies/bosses/beholder/beholder_tentacle2.png	0.76
+res://gfx/enemies/bosses/beholder/beholder_tentacle2_normal.png	0.76
+res://gfx/enemies/bosses/beholder/beholder_tentacle4.png	0.56
+res://gfx/enemies/bosses/beholder/beholder_tentacle4_normal.png	0.56
+res://gfx/enemies/bosses/nest_boss/spawner_tail.png	0.60
+res://gfx/enemies/bosses/nest_boss/spawner_tail_normal.png	0.60
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_segment.png	0.55
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_segment_heightmap_n.png	0.55
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tail.png	0.67
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tail_heightmap_n.png	0.67
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tentacle1.png	0.65
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tentacle1_heightmap_n.png	0.65
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tentacle2.png	0.74
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tentacle2_heightmap_n.png	0.74
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tentacle3.png	0.65
+res://gfx/enemies/bosses/segmented_worm_boss/segmented_worm_boss_tentacle3_heightmap_n.png	0.65
+res://gfx/enemies/bosses/thick_long_worm/thick_long_worm_tentacle1.png	0.53
+res://gfx/enemies/bosses/thick_long_worm/thick_long_worm_tentacle1_heightmap_n.png	0.53
+res://gfx/enemies/bosses/thick_long_worm/thick_long_worm_tentacle2.png	0.59
+res://gfx/enemies/bosses/thick_long_worm/thick_long_worm_tentacle2_heightmap_n.png	0.59
+res://gfx/enemies/dash_enemy.png	0.99
+res://gfx/enemies/flail_enemy2.png	1.37
+res://gfx/enemies/h_atrioventricular_node/h_atrioventricular_node2_tentacle.png	0.86
+res://gfx/enemies/h_atrioventricular_node/h_atrioventricular_node2_tentacle_heightmap_n.png	0.86
+res://gfx/enemies/lungworm/lungworm_tentacle_2.png	0.51
+res://gfx/enemies/lungworm/lungworm_tentacle_2_heightmap_n.png	0.51
+res://gfx/enemies/macrophage/macrophage_bodypart1.png	1.40
+res://gfx/enemies/macrophage/macrophage_bodypart2.png	1.70
+res://gfx/enemies/macrophage/macrophage_bodypart3.png	1.40
+res://gfx/enemies/macrophage/macrophage_gun1.png	0.61
+res://gfx/enemies/macrophage/macrophage_gun1_glow.png	0.61
+res://gfx/enemies/macrophage/macrophage_gun1_normal.png	0.61
+res://gfx/enemies/macrophage/macrophage_gun2.png	0.51
+res://gfx/enemies/macrophage/macrophage_gun2_glow.png	0.51
+res://gfx/enemies/macrophage/macrophage_gun2_normal.png	0.51
+res://gfx/enemies/macrophage/macrophage_tentacle2.png	0.63
+res://gfx/enemies/macrophage/macrophage_tentacle2_normal.png	0.63
+res://gfx/enemies/macrophage_charger/macrophage_charger - tail.png	0.64
+res://gfx/enemies/macrophage_charger/macrophage_charger - tail_n.png	0.64
+res://gfx/enemies/macrophage_cyan/ENEMY 5 - GUN - HEIGHT MAP_n.png	0.53
+res://gfx/enemies/macrophage_cyan/ENEMY 5 - GUN GLOW LAYER.png	0.53
+res://gfx/enemies/macrophage_cyan/ENEMY 5 - GUN.png	0.53
+res://gfx/enemies/macrophage_cyan_wave2hades/wave_attack_animation.png	1.13
+res://gfx/enemies/missile_enemy/missile_enemy_tentacle.png	0.51
+res://gfx/enemies/missile_enemy/missile_enemy_tentacle_heightmap_n.png	0.51
+res://gfx/enemies/missile_spawner/missile_spawner_tentacle_heightmap_n.png	1.46
+res://gfx/enemies/naegleria_fowleri(brain_boss)/naegleria_fowleri_tentacle1.png	1.21
+res://gfx/enemies/naegleria_fowleri(brain_boss)/naegleria_fowleri_tentacle2.png	1.46
+res://gfx/enemies/pneumonia_spores/pneumonia_connection.png	0.54
+res://gfx/enemies/rotating_laser.png	1.47
+res://gfx/enemies/spear_attack.png	0.75
+res://gfx/enemies/spore_bullet_2.png	0.65
+res://gfx/enemies/stomp_circle.png	1.21
+res://gfx/enemies/stomp_wave.png	0.51
+res://gfx/enemies/thick_worm/thick_worm_tail.png	0.57
+res://gfx/enemies/thick_worm/thick_worm_tail_heightmap_n.png	0.57
+res://gfx/enemies/toxin_spreader/purple brushstrokes.png	1.07
+res://gfx/enemies/wall_turret/wall_turret_tentacle1.png	0.70
+res://gfx/enemies/wall_turret/wall_turret_tentacle1_normal.png	0.70
+res://gfx/enemies/wall_turret/wall_turret_tentacle2.png	0.76
+res://gfx/enemies/wall_turret/wall_turret_tentacle2_normal.png	0.76
+res://gfx/enemies/wall_turret/wall_turret_tentacle3.png	0.55
+res://gfx/enemies/wall_turret/wall_turret_tentacle3_normal.png	0.55
+res://gfx/enemies/wall_turret/wall_turret_tentacle4.png	0.53
+res://gfx/enemies/wall_turret/wall_turret_tentacle4_normal.png	0.53
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle1.png	0.70
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle1_normal.png	0.70
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle2.png	0.76
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle2_normal.png	0.76
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle3.png	0.55
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle3_normal.png	0.55
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle4.png	0.53
+res://gfx/enemies/wall_turret_melee/wall_turret_tentacle4_normal.png	0.53
+res://gfx/enemies/wave_attack.png	1.09
+res://gfx/enemies/worm/worm_gun.png	0.58
+res://gfx/enemies/worm/worm_gun_glow.png	0.58
+res://gfx/enemies/worm/worm_gun_normal.png	0.58
+res://gfx/enemies/worm/worm_tentacle1.png	0.53
+res://gfx/enemies/worm/worm_tentacle1_normal.png	0.53
+res://gfx/enemies/worm_dark_yellow/worm_dark_yellow_tentacle2.png	0.87
+res://gfx/enemies/worm_dark_yellow/worm_dark_yellow_tentacle2_heightmap_n.png	0.87
+res://gfx/enemies/worm_explosive/worm_explosive_tail.png	0.61
+res://gfx/enemies/worm_explosive/worm_explosive_tail_heightmap_n.png	0.61
+res://gfx/enemies/worm_explosive/worm_explosive_tentacle2.png	0.54
+res://gfx/enemies/worm_explosive/worm_explosive_tentacle2_heightmap_n.png	0.54
+res://gfx/enemies/worm_segmented_1/worm_segmented_1_tail.png	0.57
+res://gfx/enemies/worm_segmented_1/worm_segmented_1_tail_glow.png	0.57
+res://gfx/enemies/worm_segmented_1/worm_segmented_1_tail_heightmap_n.png	0.57
+res://gfx/environment/Explosion test.png	1.31
+res://gfx/environment/PEDESTAL 1.png	0.59
+res://gfx/environment/PEDESTAL 2.png	0.59
+res://gfx/environment/WALL EDGE TENTACLE 1 - no shading - white.png	1.54
+res://gfx/environment/brain/background_brain_small_1.png	3.61
+res://gfx/environment/brain/background_brain_small_2.png	4.50
+res://gfx/environment/brain/background_brain_small_3_sphere1.png	1.35
+res://gfx/environment/brain/brain_entrance.png	1.22
+res://gfx/environment/brain/brain_entrance_glow.png	1.22
+res://gfx/environment/brain/brain_entrance_heightmap_n.png	1.22
+res://gfx/environment/brain/brain_wall_edge_tentacle.png	0.61
+res://gfx/environment/brain/brain_wall_pattern_1.png	1.18
+res://gfx/environment/brain/brain_wall_pattern_1_glow.png	1.18
+res://gfx/environment/brain/brain_wall_pattern_1_heightmap_n.png	1.18
+res://gfx/environment/brain/props/brain_exit1.png	0.90
+res://gfx/environment/brain/props/brain_exit1_glow.png	0.90
+res://gfx/environment/brain/props/brain_exit1_off.png	0.90
+res://gfx/environment/brain/props/brain_lightbulb1.png	0.51
+res://gfx/environment/brain/props/brain_lightbulb2.png	1.02
+res://gfx/environment/brain/props/brain_prop1.png	0.52
+res://gfx/environment/brain/props/brain_prop2.png	0.52
+res://gfx/environment/brain/props/brain_prop3.png	0.52
+res://gfx/environment/brain/props/brain_wash_texture.png	1.78
+res://gfx/environment/brain/props/brain_web2.png	2.16
+res://gfx/environment/brain/props/brain_web5.png	2.12
+res://gfx/environment/brain/props/thin_vein1.png	1.46
+res://gfx/environment/brain/props/thin_vein2.png	1.65
+res://gfx/environment/brain/props/thin_vein3.png	0.92
+res://gfx/environment/explosion_dna.png	1.14
+res://gfx/environment/heart/background_heart_small_1.png	3.61
+res://gfx/environment/heart/background_heart_small_2.png	4.50
+res://gfx/environment/heart/background_heart_small_3.png	5.50
+res://gfx/environment/heart/heart_entrance.png	1.22
+res://gfx/environment/heart/heart_entrance_glow.png	1.22
+res://gfx/environment/heart/heart_entrance_heightmap_n.png	1.22
+res://gfx/environment/heart/heart_entrance_tube.png	6.12
+res://gfx/environment/heart/heart_wall_edge_tentacle.png	0.61
+res://gfx/environment/heart/heart_wall_pattern_1.png	0.73
+res://gfx/environment/heart/heart_wall_pattern_1_glow.png	0.73
+res://gfx/environment/heart/heart_wall_pattern_1_n.png	0.73
+res://gfx/environment/heart/props/boss room/boss_room_prop11.png	0.53
+res://gfx/environment/heart/props/boss room/boss_room_prop12.png	0.53
+res://gfx/environment/heart/props/boss room/boss_room_prop13.png	0.53
+res://gfx/environment/heart/props/boss room/boss_room_prop6.png	2.73
+res://gfx/environment/heart/props/boss room/boss_room_prop7.png	2.58
+res://gfx/environment/heart/props/boss room/boss_room_prop8.png	2.49
+res://gfx/environment/heart/props/boss room/boss_room_prop9.png	1.49
+res://gfx/environment/heart/props/boss room/brain_door1.png	0.73
+res://gfx/environment/heart/props/boss room/brain_door1_heightmap_n.png	0.73
+res://gfx/environment/heart/props/boss room/brain_door_side_prop.png	0.73
+res://gfx/environment/heart/props/boss room/brain_door_side_prop_heightmap_n.png	0.73
+res://gfx/environment/heart/props/heart_prop1.png	0.52
+res://gfx/environment/heart/props/heart_prop2.png	0.52
+res://gfx/environment/heart/props/heart_prop3.png	0.52
+res://gfx/environment/heart/props/heart_prop5.png	0.51
+res://gfx/environment/heart/props/heart_prop6.png	0.52
+res://gfx/environment/heart/props/heart_prop7.png	0.52
+res://gfx/environment/heart/props/heart_prop8.png	0.51
+res://gfx/environment/heart/props/heart_web2.png	2.41
+res://gfx/environment/heart/props/heart_web3.png	1.07
+res://gfx/environment/heart/props/heart_web4.png	1.18
+res://gfx/environment/heart/props/heart_web5.png	2.04
+res://gfx/environment/heart/props/thin_vein1.png	1.19
+res://gfx/environment/heart/props/thin_vein2.png	1.07
+res://gfx/environment/heart/props/thin_vein3.png	0.60
+res://gfx/environment/intestines/background_intestines_merged.png	4.28
+res://gfx/environment/intestines/intestine_entrance.png	1.02
+res://gfx/environment/intestines/intestine_entrance_glow.png	1.02
+res://gfx/environment/intestines/intestine_entrance_heightmap_n.png	1.02
+res://gfx/environment/intestines/props/other/intestines_web1.png	0.79
+res://gfx/environment/intestines/props/other/intestines_web2.png	1.94
+res://gfx/environment/intestines/props/other/intestines_web3.png	1.04
+res://gfx/environment/intestines/props/other/intestines_web4.png	1.15
+res://gfx/environment/intestines/props/other/intestines_web5.png	1.07
+res://gfx/environment/intestines/wall_edge_nubs.png	0.79
+res://gfx/environment/intestines/wall_pattern_2.png	1.37
+res://gfx/environment/intestines/wall_pattern_2_heightmap_n.png	1.37
+res://gfx/environment/lungs/background_lungs_small_1.png	3.43
+res://gfx/environment/lungs/background_lungs_small_2.png	4.28
+res://gfx/environment/lungs/background_lungs_small_3.png	2.74
+res://gfx/environment/lungs/foreground_web_pattern_lungs.png	3.43
+res://gfx/environment/lungs/lungs_entrance.png	1.22
+res://gfx/environment/lungs/lungs_entrance_glow.png	1.22
+res://gfx/environment/lungs/lungs_entrance_heightmap_n.png	1.22
+res://gfx/environment/lungs/lungs_entrance_tube.png	6.12
+res://gfx/environment/lungs/props/lungs_web2.png	1.91
+res://gfx/environment/lungs/props/lungs_web3.png	1.40
+res://gfx/environment/lungs/props/lungs_web4.png	1.37
+res://gfx/environment/lungs/props/lungs_web5.png	1.58
+res://gfx/environment/lungs/traps/lungs_trap1_explosive.png	0.57
+res://gfx/environment/lungs/traps/lungs_trap1_heightmap_n.png	0.57
+res://gfx/environment/lungs/traps/lungs_trap3.png	0.75
+res://gfx/environment/lungs/traps/lungs_trap3_heightmap_n.png	0.75
+res://gfx/environment/lungs/wall_pattern_1.png	1.12
+res://gfx/environment/lungs/wall_pattern_1_glow.png	1.12
+res://gfx/environment/lungs/wall_pattern_1_heightmap_n.png	1.12
+res://gfx/environment/lungs/wall_pattern_2_heightmap_n.png	1.12
+res://gfx/environment/pattern_vein1.png	2.64
+res://gfx/environment/pattern_vein1_glow.png	2.64
+res://gfx/environment/pattern_vein1_glow_liver.png	2.90
+res://gfx/environment/pattern_vein1_glow_stomach.png	2.71
+res://gfx/environment/pattern_vein1_liver.png	2.90
+res://gfx/environment/pattern_vein1_stomach.png	2.71
+res://gfx/environment/pedestal_devil.png	0.56
+res://gfx/environment/purple/background/BACKGROUND PATTERN 0 - BACKGROUND.png	2.47
+res://gfx/environment/purple/background/BACKGROUND PATTERN 2 - WALLS 1.png	0.55
+res://gfx/environment/purple/background/BACKGROUND PATTERN 3 - WALLS 2.png	1.09
+res://gfx/environment/purple/background/BACKGROUND PATTERN 4 - STRINGS 2.png	1.09
+res://gfx/environment/purple/background/Background pattern 1 height map_n.png	0.91
+res://gfx/environment/purple/background/Background pattern 1 test - red dots.png	0.91
+res://gfx/environment/purple/background/FOREGROUND WEB PATTERN.png	3.61
+res://gfx/environment/purple/background/wall_liver_1.png	0.91
+res://gfx/environment/purple/props/flowers/Purple - Flower 1 - darker.png	0.52
+res://gfx/environment/purple/props/flowers/Purple - Flower 1 - lighter.png	0.52
+res://gfx/environment/purple/props/flowers/Purple - Flower 2.png	0.52
+res://gfx/environment/purple/props/flowers/Purple - Flower 3 - darker.png	0.52
+res://gfx/environment/purple/props/flowers/Purple - Flower 3 - lighter.png	0.52
+res://gfx/environment/purple/props/flowers/Purple - Glowing tentacles 1 - glow.png	0.52
+res://gfx/environment/purple/props/flowers/Purple - Glowing tentacles 1.png	0.52
+res://gfx/environment/purple/props/lightbulbs/Purple - Lightbulb 1 - light.png	4.84
+res://gfx/environment/purple/props/lightbulbs/Purple - Lightbulb 2 - light.png	3.74
+res://gfx/environment/purple/props/lightbulbs/Purple - Lightbulb 3 - light.png	9.86
+res://gfx/environment/purple/props/lightbulbs/Purple - Lightbulb 4 - light.png	6.26
+res://gfx/environment/purple/props/lightbulbs/Purple - Lightbulb 5 - light.png	4.27
+res://gfx/environment/purple/props/lightbulbs/Purple - Lightbulb 5.png	0.52
+res://gfx/environment/purple/props/lightbulbs/Purple - Lightbulb 6 - light.png	4.98
+res://gfx/environment/purple/props/others/thin_vein1.png	1.47
+res://gfx/environment/purple/props/others/thin_vein2.png	1.89
+res://gfx/environment/purple/props/others/thin_vein3.png	1.02
+res://gfx/environment/purple/props/wall_boss_rock.png	0.74
+res://gfx/environment/purple/props/webs/Purple - Web 1.png	0.82
+res://gfx/environment/purple/props/webs/Purple - Web 2.png	1.86
+res://gfx/environment/purple/props/webs/Purple - Web 3.png	1.78
+res://gfx/environment/purple/props/webs/Purple - Web 4.png	1.29
+res://gfx/environment/purple/props/webs/Purple - Web 5.png	1.77
+res://gfx/environment/purple/walls/liver_entrance.png	1.22
+res://gfx/environment/purple/walls/liver_entrance_glow.png	1.22
+res://gfx/environment/purple/walls/liver_entrance_heightmap_n.png	1.22
+res://gfx/environment/purple/walls/liver_entrance_tube.png	7.03
+res://gfx/environment/rooms/blacksmith_room/1.png	0.79
+res://gfx/environment/rooms/blacksmith_room/2.png	0.79
+res://gfx/environment/rooms/blacksmith_room/4.png	0.79
+res://gfx/environment/rooms/blacksmith_room/5-1.png	0.86
+res://gfx/environment/rooms/blacksmith_room/5-2.png	0.86
+res://gfx/environment/rooms/blacksmith_room/5-3.png	0.86
+res://gfx/environment/rooms/blacksmith_room/6-1.png	0.86
+res://gfx/environment/rooms/blacksmith_room/6-2.png	0.86
+res://gfx/environment/rooms/blacksmith_room/6-3_streamers.png	0.86
+res://gfx/environment/rooms/blacksmith_room/6-3_streamers_flip.png	0.86
+res://gfx/environment/rooms/boss_room/boss_hallway_prop1.png	0.52
+res://gfx/environment/rooms/boss_room/boss_hallway_prop1_heightmap_n.png	0.52
+res://gfx/environment/rooms/boss_room/boss_hallway_prop2.png	0.52
+res://gfx/environment/rooms/boss_room/boss_hallway_prop2_heightmap_n.png	0.52
+res://gfx/environment/rooms/boss_room/boss_hallway_prop3.png	0.52
+res://gfx/environment/rooms/boss_room/boss_hallway_prop3_heightmap_n.png	0.52
+res://gfx/environment/rooms/boss_room/boss_hallway_prop4.png	0.51
+res://gfx/environment/rooms/boss_room/boss_hallway_prop4_heightmap_n.png	0.51
+res://gfx/environment/rooms/challenge_room/2.png	0.66
+res://gfx/environment/rooms/challenge_room/3-1.png	0.78
+res://gfx/environment/rooms/challenge_room/3-2.png	1.02
+res://gfx/environment/rooms/dna_room_1/1.png	0.76
+res://gfx/environment/rooms/dna_room_1/3.png	0.76
+res://gfx/environment/rooms/dna_room_2/1.png	0.75
+res://gfx/environment/rooms/dna_room_2/3.png	0.70
+res://gfx/environment/rooms/dna_room_2/4.png	0.63
+res://gfx/environment/rooms/dna_room_2/5.png	0.75
+res://gfx/environment/rooms/dna_room_2/6.png	0.70
+res://gfx/environment/rooms/dna_room_2/7.png	0.70
+res://gfx/environment/rooms/heal_room_1/heal_room_1.png	0.77
+res://gfx/environment/rooms/heal_room_1/heal_room_2.png	0.60
+res://gfx/environment/rooms/heal_room_1/heal_room_3.png	0.60
+res://gfx/environment/rooms/heal_room_1/heal_room_4-1.png	0.79
+res://gfx/environment/rooms/heal_room_1/heal_room_4-2.png	0.79
+res://gfx/environment/rooms/heal_room_1/heal_room_4-3.png	0.79
+res://gfx/environment/rooms/heal_room_1/heal_room_5-1.png	0.79
+res://gfx/environment/rooms/heal_room_1/heal_room_5-2.png	0.79
+res://gfx/environment/rooms/heal_room_1/heal_room_5-3.png	0.79
+res://gfx/environment/rooms/heal_room_2/1-1.png	0.77
+res://gfx/environment/rooms/heal_room_2/1-2.png	0.77
+res://gfx/environment/rooms/heal_room_2/1-3.png	0.77
+res://gfx/environment/rooms/heal_room_2/2-2.png	0.77
+res://gfx/environment/rooms/heal_room_2/3.png	0.66
+res://gfx/environment/rooms/heal_room_2/5.png	0.66
+res://gfx/environment/rooms/heal_room_2/6.png	0.66
+res://gfx/environment/rooms/heal_room_2/7.png	0.66
+res://gfx/environment/rooms/item_room/item_hallway_prop1.png	0.52
+res://gfx/environment/rooms/item_room/item_hallway_prop1_heightmap_n.png	0.52
+res://gfx/environment/rooms/item_room/item_hallway_prop2.png	0.52
+res://gfx/environment/rooms/item_room/item_hallway_prop2_heightmap_n.png	0.52
+res://gfx/environment/rooms/item_room/item_hallway_prop3.png	0.52
+res://gfx/environment/rooms/item_room/item_hallway_prop3_heightmap_n.png	0.52
+res://gfx/environment/rooms/item_room/item_hallway_prop4.png	0.52
+res://gfx/environment/rooms/item_room/item_hallway_prop4_heightmap_n.png	0.52
+res://gfx/environment/rooms/pact_room/pact_room_1.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_1_glow.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_2-1.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_2-2.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_2-3.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_2-4.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_3-1.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_3-2.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_3-3.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_4-1.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_4-2.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_4-3.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_4-4.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-2.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-3.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-4.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-5.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-6.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-7.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-8.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_5-9.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_6-1.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_6-2.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_6-3.png	0.86
+res://gfx/environment/rooms/pact_room/pact_room_6-4.png	0.86
+res://gfx/environment/rooms/shop/SHOP ROOM - BACKGROUND + VEINS.png	0.97
+res://gfx/environment/rooms/shop/SHOP ROOM - BACKGROUND.png	0.97
+res://gfx/environment/rooms/shop/SHOP ROOM - RED VEINS(left).png	0.96
+res://gfx/environment/rooms/shop/SHOP ROOM - RED VEINS(right 2).png	0.60
+res://gfx/environment/rooms/shop/SHOP ROOM - RED WALL(bottom left).png	0.97
+res://gfx/environment/rooms/shop/SHOP ROOM - RED WALL(bottom right).png	0.97
+res://gfx/environment/rooms/shop/SHOP ROOM - RED WALL(top left).png	0.96
+res://gfx/environment/rooms/shop/SHOP ROOM - RED WALL(top middle).png	0.96
+res://gfx/environment/rooms/shop/SHOP ROOM - RED WALL(top right).png	0.97
+res://gfx/environment/rooms/shop/SHOP ROOM - YELLOW SPHERES(left).png	0.96
+res://gfx/environment/rooms/shop/SHOP ROOM - YELLOW SPHERES(right).png	0.60
+res://gfx/environment/rooms/shop/SHOP ROOM HEART - BACKGROUND + VEINS.png	0.70
+res://gfx/environment/rooms/shop/SHOP ROOM HEART - BACKGROUND.png	0.70
+res://gfx/environment/rooms/shop/shop_hallway_prop1.png	0.52
+res://gfx/environment/rooms/shop/shop_hallway_prop1_heightmap_n.png	0.52
+res://gfx/environment/rooms/shop/shop_hallway_prop2.png	0.52
+res://gfx/environment/rooms/shop/shop_hallway_prop2_heightmap_n.png	0.52
+res://gfx/environment/rooms/shop/shop_hallway_prop3.png	0.52
+res://gfx/environment/rooms/shop/shop_hallway_prop3_heightmap_n.png	0.52
+res://gfx/environment/rooms/shop/shop_hallway_prop4.png	0.52
+res://gfx/environment/rooms/shop/shop_hallway_prop4_heightmap_n.png	0.52
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_1-1.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_1-2.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_1-3.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_1-4.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_1-5.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_2-1.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_2-2.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_3-1.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_3-2.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_3-3.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_4-1.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_4-2.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_4-3.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_5-2.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_6-1.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_6-2.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_6-3.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_6-4.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_6-5.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_ground.png	1.01
+res://gfx/environment/secret_path/secret_path_room/secret_path_room_ground_glow.png	1.01
+res://gfx/environment/skin/background/RED BACKGROUND PATTERN 1 - BACKGROUND.png	2.47
+res://gfx/environment/skin/background/RED BACKGROUND PATTERN 3 - WALLS 2.png	1.09
+res://gfx/environment/skin/background/RED BACKGROUND PATTERN 4 - BLUE PARTICLES.png	1.09
+res://gfx/environment/skin/background/RED BACKGROUND PATTERN 5 - WALLS 3.png	0.91
+res://gfx/environment/skin/background/background_skin_merged_small.png	4.50
+res://gfx/environment/skin/props/flowers/Skin - Flower 1 - darker.png	0.52
+res://gfx/environment/skin/props/flowers/Skin - Flower 1 - lighter.png	0.65
+res://gfx/environment/skin/props/flowers/Skin - Flower 3 - darker.png	0.72
+res://gfx/environment/skin/props/flowers/Skin - Flower 3 - lighter.png	0.52
+res://gfx/environment/skin/props/flowers/Skin - Glowing tentacles 1 - glow.png	0.71
+res://gfx/environment/skin/props/flowers/Skin - Glowing tentacles 1.png	0.71
+res://gfx/environment/skin/props/lightbulbs/Skin - Lightbulb 2 - light.png	3.52
+res://gfx/environment/skin/props/lightbulbs/Skin - Lightbulb 2.png	0.51
+res://gfx/environment/skin/props/lightbulbs/Skin - Lightbulb 5 - light.png	5.53
+res://gfx/environment/skin/props/lightbulbs/Skin - Lightbulb 5.png	0.66
+res://gfx/environment/skin/props/others/thin_vein1.png	1.55
+res://gfx/environment/skin/props/others/thin_vein2.png	1.81
+res://gfx/environment/skin/props/others/thin_vein3.png	1.10
+res://gfx/environment/skin/props/webs/Skin - Web 1.png	1.35
+res://gfx/environment/skin/props/webs/Skin - Web 2.png	2.14
+res://gfx/environment/skin/props/webs/Skin - Web 3.png	2.23
+res://gfx/environment/skin/props/webs/Skin - Web 4.png	1.93
+res://gfx/environment/skin/props/webs/Skin - Web 5.png	2.22
+res://gfx/environment/skin/walls/WALL EDGE - Red - red thing.png	0.83
+res://gfx/environment/skin/walls/WALLS PATTERN - Red - Base.png	1.45
+res://gfx/environment/skin/walls/WALLS PATTERN - Red - Base_n.png	1.45
+res://gfx/environment/skin/walls/WALLS PATTERN - Red - Blue dots.png	1.45
+res://gfx/environment/skin/walls/WALLS PATTERN - skin - blue cells - Red dots.png	1.45
+res://gfx/environment/skin/walls/WALLS PATTERN - skin - blue cells - base.png	1.45
+res://gfx/environment/skin/walls/skin_entrance.png	1.22
+res://gfx/environment/skin/walls/skin_entrance_black.png	6.42
+res://gfx/environment/skin/walls/skin_entrance_glow.png	1.22
+res://gfx/environment/skin/walls/skin_entrance_heightmap_n.png	1.22
+res://gfx/environment/spike - white +red tip.png	2.18
+res://gfx/environment/stomach/background/BACKGROUND PATTERN 2 - WALLS 1.png	0.55
+res://gfx/environment/stomach/background/BACKGROUND PATTERN 3 - WALLS 2.png	1.09
+res://gfx/environment/stomach/background/BACKGROUND PATTERN 4 - WALLS 3.png	0.91
+res://gfx/environment/stomach/background/background_stomach_merged_small.png	4.50
+res://gfx/environment/stomach/props/flowers/Stomach - Flower 1 - darker.png	0.52
+res://gfx/environment/stomach/props/flowers/Stomach - Flower 1 - lighter.png	0.52
+res://gfx/environment/stomach/props/flowers/Stomach - Flower 3 - darker.png	0.52
+res://gfx/environment/stomach/props/flowers/Stomach - Flower 3 - lighter.png	0.52
+res://gfx/environment/stomach/props/flowers/Stomach - Glowing tentacles 1 - glow.png	0.52
+res://gfx/environment/stomach/props/flowers/Stomach - Glowing tentacles 1.png	0.52
+res://gfx/environment/stomach/props/lightbulbs/Stomach - Lightbulb 5.png	0.52
+res://gfx/environment/stomach/props/lightbulbs/Stomach - Lightbulb 6.png	0.52
+res://gfx/environment/stomach/props/others/thin_vein1.png	1.52
+res://gfx/environment/stomach/props/others/thin_vein2.png	2.17
+res://gfx/environment/stomach/props/others/thin_vein3.png	0.88
+res://gfx/environment/stomach/props/webs/Stomach - Web 1.png	0.95
+res://gfx/environment/stomach/props/webs/Stomach - Web 2.png	1.76
+res://gfx/environment/stomach/props/webs/Stomach - Web 3.png	1.63
+res://gfx/environment/stomach/props/webs/Stomach - Web 4.png	1.47
+res://gfx/environment/stomach/props/webs/Stomach - Web 5.png	1.56
+res://gfx/environment/stomach/walls/WALL EDGE STOMACH TENTACLE 2 - no shading.png	0.51
+res://gfx/environment/stomach/walls/WALLS PATTERN - Stomach - Base.png	0.91
+res://gfx/environment/stomach/walls/WALLS PATTERN - Stomach - Base_n.png	0.91
+res://gfx/environment/stomach/walls/WALLS PATTERN - Stomach - green glow.png	0.91
+res://gfx/environment/stomach/walls/WALLS PATTERN - Stomach - purple eyes.png	0.91
+res://gfx/environment/stomach/walls/stomach_entrance.png	1.22
+res://gfx/environment/stomach/walls/stomach_entrance_glow.png	1.22
+res://gfx/environment/stomach/walls/stomach_entrance_heightmap_n.png	1.22
+res://gfx/environment/stomach/walls/stomach_entrance_tube.png	6.38
+res://gfx/misc/circle.png	10.45
+res://gfx/misc/circle_big.png	0.59
+res://gfx/misc/circle_blurred.png	6.48
+res://gfx/misc/circle_very_blurred.png	4.12
+res://gfx/misc/ring.png	1.69
+res://gfx/nanobot_skilltree.png	1.36
+res://gfx/particles/particle12_blood.png	6.74
+res://gfx/particles/particle13_blood_cell_sheet.png	0.90
+res://gfx/particles/particle17_dna_sheet.png	0.68
+res://gfx/particles/particle19_confusion2.png	1.78
+res://gfx/particles/particle1_ sphere.png	13.25
+res://gfx/particles/particle2_ soft_sphere.png	25.92
+res://gfx/particles/particle5_ sphere_glow.png	2.34
+res://gfx/particles/particle8_soft_bubble.png	0.74
+res://gfx/particles/particle9_soft.png	6.48
+res://gfx/pickups/Coin.png	8.95
+res://gfx/pickups/CoinDetailed.png	1.24
+res://gfx/pickups/dna_pickup2.png	4.49
+res://gfx/pickups/heart_green.png	5.74
+res://gfx/pickups/heart_shield.png	5.62
+res://gfx/pickups/plasmids_pickup.png	7.74
+res://gfx/player/bodyparts/+-_launcher_glow.png	0.84
+res://gfx/player/bodyparts/+-_launcher_heightmap_n.png	0.84
+res://gfx/player/bodyparts/Player weapon - 3_shot_burst.png	1.32
+res://gfx/player/bodyparts/Player weapon - 3_shot_burst_heightmap_n.png	1.32
+res://gfx/player/bodyparts/Player weapon - flame_ejector.png	1.20
+res://gfx/player/bodyparts/Player weapon - flame_ejector_gow.png	1.20
+res://gfx/player/bodyparts/Player weapon - flame_ejector_heightmap_n.png	1.20
+res://gfx/player/bodyparts/Player weapon - rocket_launcher.png	1.37
+res://gfx/player/bodyparts/Player weapon - rocket_launcher_heightmap_n.png	1.37
+res://gfx/player/bodyparts/Player weapon - sniper.png	1.43
+res://gfx/player/bodyparts/Player weapon - sniper_heightmap_n.png	1.43
+res://gfx/player/bodyparts/Player weapon - spreadshot.png	1.43
+res://gfx/player/bodyparts/Player weapon - spreadshot_glow.png	1.43
+res://gfx/player/bodyparts/Player weapon - spreadshot_heightmap_n.png	1.43
+res://gfx/player/bodyparts/Player weapon 2.png	1.50
+res://gfx/player/bodyparts/Player weapon 2_glow.png	1.50
+res://gfx/player/bodyparts/Player weapon 2_heightmap_n.png	1.50
+res://gfx/player/bodyparts/Player weapon 3.png	1.27
+res://gfx/player/bodyparts/Player weapon 3_glow.png	1.27
+res://gfx/player/bodyparts/Player weapon 3_heightmap_n.png	1.27
+res://gfx/player/bodyparts/Player weapon 4.png	1.24
+res://gfx/player/bodyparts/Player weapon 4_heightmap_n.png	1.24
+res://gfx/player/bodyparts/Player weapon 5.png	1.67
+res://gfx/player/bodyparts/Player weapon 5_heightmap_n.png	1.67
+res://gfx/player/bodyparts/axopodium.png	1.05
+res://gfx/player/bodyparts/axopodium_heightmap_n.png	1.05
+res://gfx/player/bodyparts/bullet_lash_body.png	1.67
+res://gfx/player/bodyparts/bullet_lash_connection.png	1.30
+res://gfx/player/bodyparts/caustic_secretor.png	1.04
+res://gfx/player/bodyparts/caustic_secretor_glow.png	1.04
+res://gfx/player/bodyparts/caustic_secretor_heightmap_n.png	1.04
+res://gfx/player/bodyparts/chromatophore.png	0.89
+res://gfx/player/bodyparts/chromatophore_glow.png	0.89
+res://gfx/player/bodyparts/chromatophore_heightmap_n.png	0.89
+res://gfx/player/bodyparts/concussive_tentril.png	1.06
+res://gfx/player/bodyparts/concussive_tentril_heightmap_n.png	1.06
+res://gfx/player/bodyparts/cryopseudopod_tentacle.png	1.03
+res://gfx/player/bodyparts/cryopseudopod_tentacle_heightmap_n.png	1.03
+res://gfx/player/bodyparts/dagger.png	1.09
+res://gfx/player/bodyparts/dagger_heightmap_n.png	1.09
+res://gfx/player/bodyparts/drill.png	1.11
+res://gfx/player/bodyparts/drill_heightmap_n.png	1.11
+res://gfx/player/bodyparts/dual_blades2.png	0.91
+res://gfx/player/bodyparts/dual_blades2_heightmap_n.png	0.91
+res://gfx/player/bodyparts/electric_harpoon.png	0.93
+res://gfx/player/bodyparts/electric_harpoon_heightmap_n.png	0.93
+res://gfx/player/bodyparts/fire_lash_body.png	0.97
+res://gfx/player/bodyparts/fire_lash_connection.png	1.30
+res://gfx/player/bodyparts/flail.png	1.35
+res://gfx/player/bodyparts/flail_heightmap_n.png	1.35
+res://gfx/player/bodyparts/freeze_lash_body.png	1.17
+res://gfx/player/bodyparts/freeze_lash_connection.png	1.30
+res://gfx/player/bodyparts/freeze_ray.png	1.09
+res://gfx/player/bodyparts/freeze_ray_heightmap_n.png	1.09
+res://gfx/player/bodyparts/galvanic_conduit.png	0.95
+res://gfx/player/bodyparts/galvanic_conduit_heightmap_n.png	0.95
+res://gfx/player/bodyparts/galvanic_lash_body.png	0.73
+res://gfx/player/bodyparts/galvanic_lash_connection.png	1.03
+res://gfx/player/bodyparts/grenade_launcher.png	1.00
+res://gfx/player/bodyparts/grenade_launcher_heightmap_n.png	1.00
+res://gfx/player/bodyparts/harpoon.png	0.93
+res://gfx/player/bodyparts/harpoon_heightmap_n.png	0.93
+res://gfx/player/bodyparts/internal/ablative_mitochondrion.png	1.52
+res://gfx/player/bodyparts/internal/attractor.png	1.63
+res://gfx/player/bodyparts/internal/autophagic_mitochondrion.png	1.54
+res://gfx/player/bodyparts/internal/berserk_mitochondrion.png	1.55
+res://gfx/player/bodyparts/internal/charge_bullets.png	1.54
+res://gfx/player/bodyparts/internal/charge_mitochondrion.png	1.54
+res://gfx/player/bodyparts/internal/chitin_infuser.png	1.51
+res://gfx/player/bodyparts/internal/ciliate_strike.png	1.52
+res://gfx/player/bodyparts/internal/conal_burst.png	1.54
+res://gfx/player/bodyparts/internal/cryopulse.png	1.54
+res://gfx/player/bodyparts/internal/dash_mitochondrion.png	1.58
+res://gfx/player/bodyparts/internal/elastosome.png	1.54
+res://gfx/player/bodyparts/internal/energy_orbital.png	1.54
+res://gfx/player/bodyparts/internal/entrant_mitochondrion.png	1.64
+res://gfx/player/bodyparts/internal/explosive_charge.png	1.58
+res://gfx/player/bodyparts/internal/fractosome.png	0.52
+res://gfx/player/bodyparts/internal/galvanic_node.png	1.54
+res://gfx/player/bodyparts/internal/galvanic_sac2.png	1.54
+res://gfx/player/bodyparts/internal/gibs_detonation.png	1.54
+res://gfx/player/bodyparts/internal/iridophore_membrane.png	1.55
+res://gfx/player/bodyparts/internal/laser.png	1.54
+res://gfx/player/bodyparts/internal/lightning.png	0.66
+res://gfx/player/bodyparts/internal/minion_heavy.png	1.63
+res://gfx/player/bodyparts/internal/minion_heavy_shooter.png	1.58
+res://gfx/player/bodyparts/internal/minion_sharedGun.png	1.63
+res://gfx/player/bodyparts/internal/mutagen.png	1.58
+res://gfx/player/bodyparts/internal/opulentor.png	1.65
+res://gfx/player/bodyparts/internal/organelle_eater.png	1.51
+res://gfx/player/bodyparts/internal/ossificator.png	1.54
+res://gfx/player/bodyparts/internal/oxysome.png	1.53
+res://gfx/player/bodyparts/internal/patterns/attractor_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/autophagic_mitochondrion_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/berserk_mitochondrion_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/berserk_mitochondrion_pattern_glow.png	0.64
+res://gfx/player/bodyparts/internal/patterns/bifurcator_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/charge_mitochondrion_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/chitin_infuser_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/chronosome_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/ciliate_strike_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/cryosome_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/cryptobiotic_core_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/dodge_mitochondrion_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/dorsal_lysosome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/echosome_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/elastosome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/endospore_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/entrant_mitochondrion_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/explosive_charge_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/extensor_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/galvanic_weave_pattern.png	1.25
+res://gfx/player/bodyparts/internal/patterns/gibs_detonation_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/glycogen_synthesizer_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/golgi_apparatus_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/iridiphore_membrane_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/lightning1_pattern.png	1.25
+res://gfx/player/bodyparts/internal/patterns/magnetosome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/mutagen_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/opulentor_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/ossificator_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/oxysome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/phagosome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/photoreceptor_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/pickup_mitochondrion_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/poison_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/pristine_mitochondrion_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/projectile_surge_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/proximity_coil_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/pyrosome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/recuperative_mitochondrion_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/refiner_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/regenerator_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/resilinoplast_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/resonant_cavity_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/sentry_polyp_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/sequence_scrambler_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/sinoatrial_node_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/starved_oxysome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/sympathetic_detonator_pattern.png	1.21
+res://gfx/player/bodyparts/internal/patterns/triosome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/turgosome_pattern.png	1.20
+res://gfx/player/bodyparts/internal/patterns/vengeful_mitochondrion_pattern_.png	1.20
+res://gfx/player/bodyparts/internal/patterns/vesicle_pattern.png	1.20
+res://gfx/player/bodyparts/internal/phagosome.png	1.53
+res://gfx/player/bodyparts/internal/pickup_mitochondrion.png	1.51
+res://gfx/player/bodyparts/internal/poison.png	0.51
+res://gfx/player/bodyparts/internal/pristine_mitochondrion.png	1.51
+res://gfx/player/bodyparts/internal/recuperative_mitochondrion.png	1.63
+res://gfx/player/bodyparts/internal/recycling_dmg.png	1.53
+res://gfx/player/bodyparts/internal/refiner.png	1.56
+res://gfx/player/bodyparts/internal/regenerator.png	1.63
+res://gfx/player/bodyparts/internal/resonant_cavity.png	1.54
+res://gfx/player/bodyparts/internal/sensor synapse.png	1.54
+res://gfx/player/bodyparts/internal/sentry_polyp.png	1.52
+res://gfx/player/bodyparts/internal/sequence_scrambler.png	1.54
+res://gfx/player/bodyparts/internal/sinoatrial_node.png	1.54
+res://gfx/player/bodyparts/internal/starved_oxysome.png	1.53
+res://gfx/player/bodyparts/internal/sympathetic_detonator.png	1.58
+res://gfx/player/bodyparts/internal/triosome.png	1.56
+res://gfx/player/bodyparts/internal/turgosome.png	1.53
+res://gfx/player/bodyparts/internal/upgrade.png	1.05
+res://gfx/player/bodyparts/internal/vengeful_mitochondrion.png	1.55
+res://gfx/player/bodyparts/internal/vesicle.png	1.54
+res://gfx/player/bodyparts/internal/weapon_surge.png	1.54
+res://gfx/player/bodyparts/luciferase_pump.png	0.94
+res://gfx/player/bodyparts/luciferase_pump_glow.png	0.94
+res://gfx/player/bodyparts/luciferase_pump_heightmap_n.png	0.94
+res://gfx/player/bodyparts/machine_gun.png	1.11
+res://gfx/player/bodyparts/machine_gun_heightmap_n.png	1.11
+res://gfx/player/bodyparts/mine_launcher.png	1.07
+res://gfx/player/bodyparts/mine_launcher_heightmap_n.png	1.07
+res://gfx/player/bodyparts/minion_gun.png	0.89
+res://gfx/player/bodyparts/minion_gun_bacteriophage.png	0.88
+res://gfx/player/bodyparts/minion_gun_bacteriophage_heightmap_n.png	0.88
+res://gfx/player/bodyparts/minion_gun_glow.png	0.89
+res://gfx/player/bodyparts/minion_gun_heightmap_n.png	0.89
+res://gfx/player/bodyparts/operculum.png	0.70
+res://gfx/player/bodyparts/operculum_heightmap_n.png	0.70
+res://gfx/player/bodyparts/pizza_cutter_longer.png	0.82
+res://gfx/player/bodyparts/pizza_cutter_longer_heightmap_n.png	0.82
+res://gfx/player/bodyparts/plasma_whip.png	1.10
+res://gfx/player/bodyparts/plasma_whip_glow.png	1.10
+res://gfx/player/bodyparts/plasma_whip_heightmap_n.png	1.10
+res://gfx/player/bodyparts/pyrocist.png	0.82
+res://gfx/player/bodyparts/pyrocist_glow.png	0.82
+res://gfx/player/bodyparts/pyrocist_heightmap_n.png	0.82
+res://gfx/player/bodyparts/secret_path_weapon.png	0.91
+res://gfx/player/bodyparts/secret_path_weapon_glow.png	0.91
+res://gfx/player/bodyparts/secret_path_weapon_heightmap_n.png	0.91
+res://gfx/player/bodyparts/side_shot.png	1.06
+res://gfx/player/bodyparts/side_shot_heightmap_n.png	1.06
+res://gfx/player/bodyparts/slow_orb.png	1.10
+res://gfx/player/bodyparts/slow_orb_glow.png	1.10
+res://gfx/player/bodyparts/slow_orb_heightmap_n.png	1.10
+res://gfx/player/bodyparts/spear.png	1.54
+res://gfx/player/bodyparts/spear_heightmap_n.png	1.54
+res://gfx/player/bodyparts/spreadshot2.png	1.00
+res://gfx/player/bodyparts/spreadshot2_heightmap_n.png	1.00
+res://gfx/player/bodyparts/staurolobber.png	0.84
+res://gfx/player/bodyparts/symbiotic_pseudopod.png	0.86
+res://gfx/player/bodyparts/symbiotic_pseudopod_heightmap_n.png	0.86
+res://gfx/player/bodyparts/tentacle2.png	1.03
+res://gfx/player/bodyparts/tentacle2_heightmap_n.png	1.03
+res://gfx/player/bodyparts/tentacle_energy.png	0.95
+res://gfx/player/bodyparts/tentacle_energy_glow.png	0.95
+res://gfx/player/bodyparts/tentacle_energy_heightmap_n.png	0.95
+res://gfx/player/bodyparts/toxin_lash_body.png	1.21
+res://gfx/player/bodyparts/toxin_lash_connection.png	1.30
+res://gfx/player/bullets/blade_orbital.png	7.51
+res://gfx/player/bullets/bullet_explosive.png	0.59
+res://gfx/player/bullets/circle_attack.png	1.44
+res://gfx/player/bullets/explosive_shot.png	1.82
+res://gfx/player/bullets/fire_red.png	0.80
+res://gfx/player/bullets/freeze_circle.png	0.86
+res://gfx/player/bullets/green_brushstroke.png	10.06
+res://gfx/player/bullets/orb_bullet.png	0.83
+res://gfx/player/bullets/rocket_bullet.png	0.77
+res://gfx/player/bullets/spear_attack.png	0.96
+res://gfx/player/collector_player/collector_player_l1-4.png	3.61
+res://gfx/player/collector_player/collector_player_l2-6.png	3.60
+res://gfx/player/collector_player/collector_player_l2-7.png	3.61
+res://gfx/player/collector_player/collector_player_l2-8.png	3.60
+res://gfx/player/collector_player/collector_player_l3-1.png	3.60
+res://gfx/player/collector_player/collector_player_l3-2.png	3.61
+res://gfx/player/collector_player/collector_player_l3-3.png	3.60
+res://gfx/player/collector_player/collector_player_l4-1.png	3.60
+res://gfx/player/collector_player/collector_player_l4-2.png	3.60
+res://gfx/player/collector_player/collector_player_l4-3.png	3.60
+res://gfx/player/coop_player/coop_base_body.png	3.61
+res://gfx/player/coop_player/coop_evo1.png	3.60
+res://gfx/player/coop_player/coop_evo2.png	3.60
+res://gfx/player/coop_player/coop_evo3.png	3.61
+res://gfx/player/coop_player/coop_evo4.png	3.60
+res://gfx/player/coop_player/coop_evo5.png	3.60
+res://gfx/player/coop_player/coop_evo6.png	3.60
+res://gfx/player/coop_player/coop_l3-1.png	3.60
+res://gfx/player/coop_player/coop_l3-2.png	3.60
+res://gfx/player/coop_player/coop_l3-3.png	3.60
+res://gfx/player/evolutions/PARASITE - 10.png	12.00
+res://gfx/player/evolutions/PARASITE - 2 - CHUNKY HEAD.png	2.45
+res://gfx/player/evolutions/PARASITE - 3 - CHUNKY BUTT.png	2.23
+res://gfx/player/evolutions/PARASITE - 7.png	12.00
+res://gfx/player/evolutions/PARASITE - 8.png	12.00
+res://gfx/player/evolutions/VIRUS PNG - test.png	12.00
+res://gfx/player/evolutions/VIRUS small.png	12.00
+res://gfx/player/evolutions/bacteria_2bodies.png	3.59
+res://gfx/player/evolutions/bacteria_2circles.png	12.00
+res://gfx/player/evolutions/bacteria_3circles.png	3.60
+res://gfx/player/evolutions/bacteria_biggerCircle.png	3.60
+res://gfx/player/evolutions/bacteria_circleTube.png	3.60
+res://gfx/player/evolutions/bacteria_circleTube2.png	3.60
+res://gfx/player/evolutions/l2_chunkybutt.png	2.23
+res://gfx/player/evolutions/l2_dual.png	3.60
+res://gfx/player/evolutions/l3_wide.png	3.60
+res://gfx/player/evolutions/l4_triple1.png	3.60
+res://gfx/player/evolutions/l4_triple2.png	3.60
+res://gfx/player/evolutions/l4_wide.png	3.60
+res://gfx/player/minions/heavy_minion_tail.png	1.77
+res://gfx/player/minions/heavy_minion_tail_heightmap_n.png	1.77
+res://gfx/player/minions/heavy_minion_tentacle.png	1.48
+res://gfx/player/minions/heavy_minion_tentacle_heightmap_n.png	1.48
+res://gfx/player/minions/sharedGun_minion_tentacle.png	1.10
+res://gfx/player/minions/sharedGun_minion_tentacle_heightmap_n.png	1.10
+res://gfx/player/protozoa_player/protozoa_shape1.png	3.60
+res://gfx/player/strafe_player/strafe1_normal.png	0.73
+res://gfx/player/strafe_player/strafe_2.png	3.60
+res://gfx/player/strafe_player/strafe_3.png	3.60
+res://gfx/player/strafe_player/strafe_4.png	3.60
+res://gfx/player/strafe_player/strafe_5.png	3.60
+res://gfx/player/strafe_player/strafe_6.png	3.60
+res://gfx/player/strafe_player/strafe_7.png	3.61
+res://gfx/player/strafe_player/strafe_player_l2-1.png	3.60
+res://gfx/player/strafe_player/strafe_player_l2-3.png	3.60
+res://gfx/player/strafe_player/strafe_player_l2-hex.png	3.60
+res://gfx/player/strafe_player/strafe_player_l3-1.png	3.60
+res://gfx/player/strafe_player/strafe_player_l3-2.png	3.60
+res://gfx/player/strafe_player/strafe_player_l3-3.png	3.60
+res://gfx/player/strafe_player/strafe_player_l3-4.png	3.60
+res://gfx/player/strafe_player/strafe_player_l3-5.png	3.60
+res://gfx/player/strafe_player/strafe_player_l3-6.png	3.60
+res://gfx/player/strafe_player/strafe_player_l4-1.png	3.60
+res://gfx/player/strafe_player/strafe_player_l4-2.png	3.60
+res://gfx/player/strafe_player/strafe_player_l4-3.png	3.60
+res://gfx/player/strafe_player/strafe_test_2.png	3.61
+res://gfx/player/worm_player/worm_parasite_base_tail2.png	0.59
+res://gfx/player/worm_player/worm_parasite_base_tail2_heightmap_n.png	0.59
+res://gfx/poison_tile.png	45.00
+res://gfx/red_arrow.png	1.50
+res://gfx/red_sphere.png	0.54
+res://gfx/reroll_machine.png	0.95
+res://gfx/reroll_machine_heightmap_n.png	0.95
+res://gfx/strafer_skilltree.png	1.00
+res://gfx/ui/VIRUS HEALTH BAR - GREEN SQUARE.png	1.30
+res://gfx/ui/VIRUS HEALTH BAR - ORANGE SQUARE.png	1.30
+res://gfx/ui/VIRUS HEALTH BAR - RED SQUARE.png	1.24
+res://gfx/ui/VIRUS HEALTH BAR - WHITE SQUARE.png	1.01
+res://gfx/ui/bodymap/map_fullHD.png	5.43
+res://gfx/ui/bodymap/map_outline_brain.png	1.01
+res://gfx/ui/bodymap/map_outline_heart.png	1.01
+res://gfx/ui/bodymap/map_outline_intestines.png	1.01
+res://gfx/ui/bodymap/map_outline_liver.png	1.01
+res://gfx/ui/bodymap/map_outline_lungs.png	1.01
+res://gfx/ui/bodymap/map_outline_skin.png	1.02
+res://gfx/ui/bodymap/map_outline_stomach.png	1.01
+res://gfx/ui/bodymap/map_overlay_brain.png	1.01
+res://gfx/ui/bodymap/map_overlay_heart.png	1.01
+res://gfx/ui/bodymap/map_overlay_intestines.png	1.01
+res://gfx/ui/bodymap/map_overlay_liver.png	1.01
+res://gfx/ui/bodymap/map_overlay_lungs.png	1.01
+res://gfx/ui/bodymap/map_overlay_stomach.png	1.01
+res://gfx/ui/boss_icon.png	13.50
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/keyboard_a_outline.png	1.51
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/keyboard_d_outline.png	1.51
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/keyboard_e_outline.png	1.18
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/keyboard_s_outline.png	1.51
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/keyboard_space_outline.png	1.76
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/keyboard_tab_outline.png	1.50
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/keyboard_w_outline.png	1.51
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/mouse_left_outline.png	1.51
+res://gfx/ui/kenney_input-prompts/Keyboard & Mouse/Double/mouse_right_outline.png	1.51
+res://gfx/ui/microscope_screen/microscope_screen3-1.png	1.43
+res://gfx/ui/microscope_screen/microscope_screen3-2.png	1.21
+res://gfx/ui/shop_icon.png	10.99
+res://gfx/ui/special_room_icon.png	9.00
+res://gfx/ui/special_room_icon2.png	9.36
+res://gfx/ui/square_mask.png	1.25
+res://gfx/ui/stamina_full.png	1.56
+res://gfx/ui/teleport_icon.png	15.01
+res://gfx/ui/treasure_icon.png	11.25
+res://gfx/worm_skilltree.png	1.36
+res://scn/enemies/shots/beholder_laser_beam.tscn::GradientTexture2D_vul6b	3.16
+res://scn/enemies/shots/beholder_laser_beam.tscn::GradientTexture2D_xts8y	2.24
+res://scn/enemies/shots/heart_laser_beam.tscn::GradientTexture2D_vul6b	1.06
+res://scn/enemies/shots/heart_laser_beam.tscn::GradientTexture2D_xts8y	1.03
+res://scn/enemies/shots/scolex_laser_beam.tscn::GradientTexture2D_vul6b	0.69
+res://scn/enemies/shots/scolex_laser_beam.tscn::GradientTexture2D_xts8y	1.06
+res://scn/enemies/shots/wall_spider_laser_beam.tscn::GradientTexture2D_k5ig3	0.62
+res://scn/enemies/shots/wall_spider_laser_beam.tscn::GradientTexture2D_vul6b	0.51
+res://scn/environ/props/cool_effect_light_2d.tscn::GradientTexture2D_eu7sc	449.21
+res://scn/environ/room_base/next_level_exit.tscn::GradientTexture2D_2m4e3	2.83
+res://scn/environ/room_base/next_level_exit.tscn::GradientTexture2D_u7w2o	2.84
+res://scn/environ/secret_path/brain_gate.tscn::GradientTexture2D_fade	7.03
+res://scn/player/projectiles/active_laser_beam.tscn::GradientTexture2D_vul6b	3.58
+res://scn/player/projectiles/active_laser_beam.tscn::GradientTexture2D_xts8y	3.16
+res://scn/player/projectiles/chromatophore_gland_beam.tscn::GradientTexture2D_vul6b	1.78
+res://scn/player/projectiles/chromatophore_gland_beam.tscn::GradientTexture2D_xts8y	1.58
+res://scn/player/projectiles/staurolaser_beam.tscn::GradientTexture2D_prefire	0.84
+res://scn/player/projectiles/staurolaser_beam.tscn::GradientTexture2D_vul6b	1.27

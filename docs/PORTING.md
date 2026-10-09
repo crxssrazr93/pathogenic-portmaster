@@ -84,9 +84,28 @@ The launcher passes the two scales and stores them in the setup stamp with the p
 
 Result at 640x480 on the PC: cache 959 MB down to 147 MB, setup 14 s, first level textures 485 MB down to 147 MB, no visible loss. On the device: setup about 4 minutes, the level loads without being killed (textures 148 MB, RSS about 700 MB plus 39 MB swap). Larger screens store larger textures, hence "up to about 1 GB" of cache.
 
-### 4.4 Graphics defaults
+### 4.4 Measured drawn sizes
+
+The blanket scales of 4.3 are right for most art but too small for some: the wall pattern the room shader tiles over every wall, the tiled backgrounds, explosion sheets, the player's body in the body editor. `setup/drawn_sizes.tsv` lists such textures with the largest size they are drawn at, measured in the game: "res://path<TAB>k", k being screen pixels per texture pixel at the 1920x1080 design size. A listed texture is stored at `min(1, max(default, min(k * ui scale, 1.5 * default)))`.
+
+* **The survey.** The test only mod `tests/survey/` walks the game (every room of 7 levels with 4 seeds, every enemy, room, effect and UI scene, every body part of each parasite, the body editor and the level start map) and records, per texture, the largest k it is drawn at. `tests/survey/regenerate.sh` runs it all (about 1.5 hours on 8 cores) and `build/make_drawn_table.py` merges the results into the table (804 textures). Close-up views (the body editor, the level start map) count only for the player's art and the UI, since they draw level art far larger than play does. Some passes crash the game at a given item, so the runner resumes after it (`SV_FROM`, `tests/survey/sweep.sh`); four scenes that crash it on their own are skipped (`enemy_defaults`, `enemy_hp_bar`, `freeze_effect`, `ally_defaults`).
+* **The cap.** The game loads a level's whole art set up front, so every listed texture of the level costs memory, not only the ones on screen. Texture memory at 640x480 on the PC (Godot's monitor, the first 5 rooms):
+
+| Stored | Level 1 | Level 4 | Whole cache |
+|--|--|--|--|
+| Blanket scales only | 122 MB | 138 MB | 249 MB |
+| Table, at most 1.5 times larger per side (shipped) | 149 MB | 164 MB | 317 MB |
+| Table, at most 2 times | 182 MB | 195 MB | 382 MB |
+| Table, no cap | 223 MB | 233 MB | 469 MB |
+
+The device's first level ran at about 700 MB RSS plus swap with the blanket scales, so the uncapped table (+100 MB) does not fit. The 1.5 cap costs about 27 MB in a level.
+* **Setup.** The table is part of the setup stamp (by its `cksum`), and each cached texture's `.src` holds the original's MD5 and its stored size, so a port update that changes the table converts only the textures whose size changed.
+
+### 4.5 Graphics defaults
 
 The mod's `globals.gd` extension sets handheld defaults only for keys the player has not set: no lighting (section 5), environment and post processing low, physics accuracy off, no foreground parallax, a 30 fps cap and no HDR 2D (its 16-bit float buffers are slow on handheld GPUs, and there is no glow that needs it). Live action cutscenes are skipped by default because the 1080p HEVC videos are too heavy to decode on a handheld CPU. The player can turn them back on in the options.
+
+Measured on the RG35XX H with cutscenes turned on: the main menu plays its live action background (720p H.264) at about 25 fps, but the game's RSS rises from 473 MB to 634 MB (available memory 344 MB to about 148 MB). The memory is freed when the menu is left. The 1080p HEVC drop cutscene opened and closed without a crash, but showed its first frame and then black for about 18 s. The default stays off; the slime background the game draws instead is its own fallback.
 
 Log noise that is harmless: 182 RGBFloat and 48 RGBAFloat textures converted to half floats (Mali), 44 "Too many instances using shader instance variables" (`secret_text.gd`, a 1024 buffer on this GPU), and one "Cannot get class 'DisabledBreadcrumb'" from the no-op Sentry.
 
@@ -108,6 +127,8 @@ Measured on the RG35XX H with the test only probe mod (`tests/probe/`), which lo
 * **Minimaps.** The room map and the body overview each draw the whole level again through their own SubViewport (about 4 ms a frame). They are redrawn every second frame, every frame while the map is expanded, and not at all while hidden.
 * **SubViewports.** Offscreen views (minimaps, the body editor, the DNA panels, the menu's CRT screen) render at their 1920x1080 or 1920x1440 design size and are then shown at a third of that. Each one shown through a SubViewportContainer now renders at the size it is shown: the container stretches it and divides its resolution by the screen's whole factor (3 at 640x480, 2 at 720x720), and `size_2d_override` keeps the content laid out at the design size, input included. Viewports with their own 3D camera keep their size, since `Camera3D.unproject_position` uses the override. They also drop HDR 2D.
 * **Light motes.** The ambient light particles (`particle_light*.tscn`) are the largest group of emitters, about 135 in a level and each its own GPU pass: two of every three are removed.
+
+Fight candidates, measured on the RG35XX H with the test only mod `tests/fight_ab/` during the game's own `--stress-test --gpu-ablate` horde (25 enemies held alive; the game's GPU timers read 0 on the device's GLES driver, so the mod measures the mean frame time in interleaved 2.5 s windows). Baseline windows 62.0 to 66.3 ms. Enemy cell (toon) material off: 62.1 and 62.7 ms. Hair hidden: 65.0 and 65.8 ms. Eager physics sleep (0.1 s, linear 10, angular 1): 62.9 and 62.8 ms. Each is at most about 2 ms of a 64 ms frame, inside the baseline's spread and far from the 50 ms that the next vsync step (20 fps) needs, so none is shipped. The horde's frame is 24 ms of render CPU (the game's own report) and the rest game logic and physics.
 
 What did not move the frame rate in a quiet room: stopping `hair.gd`, `blood_stream.gd`, `connection.gd`, the vitals graphs or the parallax sprites, hiding the HUD, hiding all 182 particle emitters, 20 physics ticks a second, and the background mask viewport (about 2 ms). Switching off the player's CanvasGroup saves about 2 ms, but the game tints it for every hit flash and dodge, and `player.gd` declares a global class, which a script extension cannot replace, so it stays.
 
@@ -133,7 +154,10 @@ What did not move the frame rate in a quiet room: stopping `hair.gd`, `blood_str
 9. **Counting the sampler's RSS as the whole story.** On Mali GPUs buffers are shared memory and appear as file-rss, so the device is judged by RSS plus swap and the video memory monitor together.
 10. **A script extension of `editor.gd`.** The script declares a global class (`Editor`), and the extension broke other scripts that use the class ("hides a global script class"). The mod corrects the editor from its own `_physics_process` instead.
 11. **Driving the player with injected stick events on the device.** Buttons injected into the controller's evdev node work, but the driver keeps reporting the real stick, so the probe holds input actions instead (`/tmp/probe_cmd`).
-12. **Test harness pitfalls**: always pass `--resolution`, stop Godot before Xwayland, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display.
+12. **Test harness pitfalls**: always pass `--resolution`, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display. Never run the game on a rootful Xwayland (`-decorate`): that is a window on the desktop. `tests/localtest.sh` uses Xvfb (software rendering) and stops when it is not up; the survey runs in gamescope's headless backend (on the GPU, about 10 times faster) with a private runtime folder, so the game cannot reach the desktop's display.
+13. **The game's GPU timers for fight A/B tests** (`--gpu-ablate`, `viewport_get_measured_render_time_gpu`). They read 0 ms on Mali GLES; frame time windows are used instead.
+14. **A script extension of `stress_test.gd`.** It fails to compile at mod load (its preloaded level configs cannot load that early), so `tests/fight_ab/` is a plain mod node.
+15. **The drawn size table without a cap.** About 100 MB more textures in a level (4.4).
 
 ### Texture cache after game updates
 

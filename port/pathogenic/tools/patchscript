@@ -26,7 +26,7 @@ port_log "running the Godot setup script (ui scale $ui_scale, world scale $world
   done
 # Success is the marker file the setup writes after its last step (its exit code is not usable)
 if [ -f cache/.setup_ok ]; then
-  echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale" > cache/.setup_stamp
+  echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale $(cksum < setup/drawn_sizes.tsv 2>/dev/null | cut -d' ' -f1)" > cache/.setup_stamp
   echo "Done. Starting the game."
   { port_log "setup finished in ${SECONDS}s"; port_mem end; } >> setup_log.txt
 else

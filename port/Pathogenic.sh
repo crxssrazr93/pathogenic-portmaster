@@ -92,7 +92,9 @@ file_stamp() {
 # design, the levels (camera zoomed out to about a third) at half that.
 ui_scale="$(awk -v w="$DISPLAY_WIDTH" -v h="$DISPLAY_HEIGHT" 'BEGIN { s = w / 1920; if (h / 1080 < s) s = h / 1080; if (s > 1) s = 1; printf "%.4f", s }')"
 world_scale="$(awk -v s="$ui_scale" 'BEGIN { printf "%.4f", s / 2 }')"
-setup_stamp() { echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale"; }
+# The table of measured drawn sizes (setup/drawn_sizes.tsv) is part of the stamp, by content (cksum is
+# in busybox too): a port update that changes it converts the textures it lists again.
+setup_stamp() { echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale $(cksum < setup/drawn_sizes.tsv 2>/dev/null | cut -d' ' -f1)"; }
 # done: the stamp matches and the converted textures are still there
 setup_done() { [ -d cache/textures ] && [ "$(cat cache/.setup_stamp 2>/dev/null)" = "$(setup_stamp)" ]; }
 port_files gamedata/pathogenic.pck

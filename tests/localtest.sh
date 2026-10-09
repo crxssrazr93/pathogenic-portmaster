@@ -15,8 +15,9 @@ GODOT="${GODOT:?set GODOT to godot471.x86_64 from the godot_4.7.1 runtime}"; PCK
 OUT="$S/out/$TAG"; mkdir -p "$OUT"; rm -f "$OUT"/*.png "$OUT"/*.mp4 "$OUT"/diag.log "$OUT"/rss.log
 # a previous server on this display may still be shutting down; then wait until the new one answers
 while [ -e "/tmp/.X${DISP:-5}-lock" ]; do sleep 0.5; done
-Xvfb :${DISP:-5} -screen 0 "${RES}x24" -nolisten tcp >/dev/null 2>&1 & XPID=$!
+unset WAYLAND_DISPLAY; export SDL_VIDEODRIVER=x11 XDG_RUNTIME_DIR=/tmp/xdg-offscreen; mkdir -p -m 700 /tmp/xdg-offscreen; Xvfb :${DISP:-5} -screen 0 "${RES}x24" -nolisten tcp >/dev/null 2>&1 & XPID=$!
 for i in $(seq 40); do DISPLAY=:${DISP:-5} xdpyinfo >/dev/null 2>&1 && break; sleep 0.5; done
+DISPLAY=:${DISP:-5} xdpyinfo >/dev/null 2>&1 || { echo "offscreen X server :${DISP:-5} did not start"; kill $XPID 2>/dev/null; exit 1; }
 before=$(ls /dev/input/)
 REC_CMD="ffmpeg -y -loglevel error -f x11grab -framerate 30 -video_size $RES -i :${DISP:-5} -c:v libx264 -preset ultrafast $OUT/{name}.mp4" \
 SHOT_CMD="DISPLAY=:${DISP:-5} import -window root $OUT/{name}.png 2>/dev/null" \

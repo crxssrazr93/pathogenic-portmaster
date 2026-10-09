@@ -1,0 +1,23 @@
+{
+ "name": "Survey",
+ "namespace": "PortMaster",
+ "version_number": "0.0.1",
+ "website_url": "https://portmaster.games/",
+ "description": "drawn size survey (tests only)",
+ "dependencies": [],
+ "extra": {
+  "godot": {
+   "authors": [
+    "crxssrazr93"
+   ],
+   "compatible_mod_loader_version": [
+    "7.0.1"
+   ],
+   "compatible_game_version": [],
+   "incompatibilities": [],
+   "load_before": [],
+   "tags": [],
+   "config_schema": {}
+  }
+ }
+}
