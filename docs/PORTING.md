@@ -93,12 +93,12 @@ The blanket scales of 4.3 are right for most art but too small for some: the wal
 
 | Stored | Level 1 | Level 4 | Whole cache |
 |--|--|--|--|
-| Blanket scales only | 122 MB | 138 MB | 249 MB |
-| Table, at most 1.5 times larger per side (shipped) | 149 MB | 164 MB | 317 MB |
-| Table, at most 2 times | 182 MB | 195 MB | 382 MB |
-| Table, no cap | 223 MB | 233 MB | 469 MB |
+| Blanket scales only | 89 MB | 101 MB | 140 MB |
+| Table, at most 1.5 times larger per side (shipped) | 104 MB | 115 MB | 178 MB |
+| Table, at most 2 times | 123 MB | 133 MB | 215 MB |
+| Table, no cap | 161 MB | 168 MB | 292 MB |
 
-The device's first level ran at about 700 MB RSS plus swap with the blanket scales, so the uncapped table (+100 MB) does not fit. The 1.5 cap costs about 27 MB in a level.
+The uncapped table adds about 70 MB in a level, on a device whose first level already used about 700 MB RSS plus swap. The 1.5 cap costs about 15 MB. On the RG35XX H with the shipped table: setup 358 s (3226 textures, 178 MB), first level at 30 fps, 632 MB RSS plus 70 MB swap (peak 681 MB) after several minutes, against about 700 MB plus 39 MB before the table.
 * **Setup.** The table is part of the setup stamp (by its `cksum`), and each cached texture's `.src` holds the original's MD5 and its stored size, so a port update that changes the table converts only the textures whose size changed.
 
 ### 4.5 Graphics defaults
@@ -157,7 +157,7 @@ What did not move the frame rate in a quiet room: stopping `hair.gd`, `blood_str
 12. **Test harness pitfalls**: always pass `--resolution`, use `bwrap --die-with-parent` and `ulimit -c 0`, and give every harness its own display. Never run the game on a rootful Xwayland (`-decorate`): that is a window on the desktop. `tests/localtest.sh` uses Xvfb (software rendering) and stops when it is not up; the survey runs in gamescope's headless backend (on the GPU, about 10 times faster) with a private runtime folder, so the game cannot reach the desktop's display.
 13. **The game's GPU timers for fight A/B tests** (`--gpu-ablate`, `viewport_get_measured_render_time_gpu`). They read 0 ms on Mali GLES; frame time windows are used instead.
 14. **A script extension of `stress_test.gd`.** It fails to compile at mod load (its preloaded level configs cannot load that early), so `tests/fight_ab/` is a plain mod node.
-15. **The drawn size table without a cap.** About 100 MB more textures in a level (4.4).
+15. **The drawn size table without a cap.** About 70 MB more textures in a level at 640x480 (4.4).
 
 ### Texture cache after game updates
 
