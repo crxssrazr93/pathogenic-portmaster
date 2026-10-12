@@ -1,5 +1,4 @@
 #!/bin/bash
-# PORTMASTER: pathogenic.zip, Pathogenic.sh
 
 XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 
@@ -23,28 +22,18 @@ godot_runtime="godot_4.7.1"
 godot_executable="godot471.$DEVICE_ARCH"
 weston_runtime="weston_pkg_0.2"
 
-# Godot opens the game's GDExtension libraries (res://addons/...) relative to the working
-# directory, so the arm64 builds sit under addons/ in the port folder.
 cd "$GAMEDIR"
-# the previous run's log is kept as log.prev.txt
 mv -f "$GAMEDIR/log.txt" "$GAMEDIR/log.prev.txt" 2>/dev/null
 > "$GAMEDIR/log.txt" && exec > >(tee "$GAMEDIR/log.txt") 2>&1
-# Device, system and memory details for bug reports (tools/portlog.sh)
-# The files a bug report needs; named in log.txt and on screen only when something fails
 export PORT_REPORT_FILES="ports/pathogenic/log.txt and setup_log.txt"
 source "$GAMEDIR/tools/portlog.sh"
 port_header "Pathogenic launcher"
 mkdir -p "$CONFDIR"
 
-# Godot's "Keep" boot splash mode fits the height on any landscape screen, which cuts the sides
-# off the 16:9 splash on 4:3 screens; "Keep Width" shows all of it. The game keeps its own
-# settings in this file too, so the key is added back whenever it is missing.
 override="$CONFDIR/godot/app_userdata/Pathogenic/godot_settings_override.cfg"
 mkdir -p "$(dirname "$override")"
 grep -q "^boot_splash/stretch_mode" "$override" 2>/dev/null ||
   printf '\n[application]\n\nboot_splash/stretch_mode=2\n' >> "$override"
-# Godot only flushes print() output at exit in release builds, so the FPS lines (--print-fps)
-# would be lost when the firmware closes the game; flush every line instead.
 grep -q "^run/flush_stdout_on_print" "$override" 2>/dev/null ||
   printf '\n[application]\n\nrun/flush_stdout_on_print=true\n' >> "$override"
 
@@ -78,24 +67,15 @@ $ESUDO mount "$controlfolder/libs/${weston_runtime}.squashfs" "$weston_dir"
 port_mounted "$godot_runtime" "$godot_dir/$godot_executable"
 port_mounted "$weston_runtime" "$weston_dir/westonwrap.sh"
 
-# Size and modification time of each file, as "stat -c '%s %Y'" prints them (muOS has no stat)
 file_stamp() {
   if command -v stat >/dev/null; then stat -c '%s %Y' "$@" 2>/dev/null; return 0; fi
   local f
   for f in "$@"; do [ -e "$f" ] && echo "$(ls -lnL "$f" | awk '{print $5}') $(date -r "$f" +%s)"; done
   return 0
 }
-# First run (and again after the game updates its pck, or on another screen size): adapt the
-# user's pck to this device's GPU, memory and screen. setup/port_setup.gd explains the step; it
-# skips work already done, so an interrupted run just continues next time.
-# Textures are stored at the size they are drawn at: the UI at the screen's scale of its 1920x1080
-# design, the levels (camera zoomed out to about a third) at half that.
 ui_scale="$(awk -v w="$DISPLAY_WIDTH" -v h="$DISPLAY_HEIGHT" 'BEGIN { s = w / 1920; if (h / 1080 < s) s = h / 1080; if (s > 1) s = 1; printf "%.4f", s }')"
 world_scale="$(awk -v s="$ui_scale" 'BEGIN { printf "%.4f", s / 2 }')"
-# The table of measured drawn sizes (setup/drawn_sizes.tsv) is part of the stamp, by content (cksum is
-# in busybox too): a port update that changes it converts the textures it lists again.
 setup_stamp() { echo "$(file_stamp gamedata/pathogenic.pck) $ui_scale $world_scale $(cksum < setup/drawn_sizes.tsv 2>/dev/null | cut -d' ' -f1)"; }
-# done: the stamp matches and the converted textures are still there
 setup_done() { [ -d cache/textures ] && [ "$(cat cache/.setup_stamp 2>/dev/null)" = "$(setup_stamp)" ]; }
 port_files gamedata/pathogenic.pck
 if setup_done; then
@@ -119,7 +99,6 @@ if ! setup_done; then
     pm_finish
     exit 1
   fi
-  # tools/patchscript writes the stamp only on success, from the pck as the setup left it
   if ! setup_done; then
     port_log "setup failed"
     port_report
@@ -131,11 +110,6 @@ if ! setup_done; then
   fi
 fi
 
-# The input device a mapping line is for. By its SDL GUID first (bus, vendor, product and version,
-# little endian; current SDL keeps a CRC of the name in bytes 2 and 3, so those are skipped): the
-# mapping's name need not be the device's (muOS maps its "muOS-Keys" pad as "Deeplay-keys"). Only
-# joysticks count, since key devices such as gpio-keys can report the same ids. Then by name, then
-# the only joystick with buttons.
 mapping_pad() {
   local guid="${1%%,*}" name="${1#*,}" ev id pads=()
   name="${name%%,*}"
@@ -154,10 +128,6 @@ mapping_pad() {
   done
   [ ${#pads[@]} -eq 1 ] && echo "${pads[0]}"
 }
-# Godot numbers joypad buttons from BTN_JOYSTICK (0x120) upwards, then BTN_MISC to BTN_JOYSTICK,
-# and skips lower key codes. SDL numbers every key code in ascending order, so on pads that also
-# report keys like volume or Esc the SDL mapping's bN indices point at the wrong buttons in Godot.
-# Renumber them using the pad's key bitmap.
 godot_joy_mapping() {
   local mapping="$1" name="${1#*,}" dev="" ev wbits=64 n i b w code
   name="${name%%,*}"
@@ -192,12 +162,6 @@ godot_joy_mapping() {
   echo "$out"
 }
 
-# The game reads the pads itself (Godot joypad input), each pad as its own player. The built in pad
-# gets PortMaster's mapping for the device, renumbered for Godot's button order; other pads use
-# Godot's own controller database. The mapping goes to the game as a westonwrap VAR=value argument:
-# westonwrap sources PortMaster's control.txt again, which on some firmwares (muOS) exports the
-# original mapping over anything exported here. westonwrap evals its arguments, so the mapping is
-# one line and the spaces in its name (only the GUID is matched) become dots.
 godot_mapping=""
 while IFS= read -r line; do
   [ -n "$line" ] || continue
@@ -215,10 +179,6 @@ pm_platform_helper "$godot_dir/$godot_executable"
 port_log "controller mapping for the game: ${godot_mapping:-none}"
 
 port_log "starting the game, texture scales ui $ui_scale world $world_scale"
-# The game is built for Vulkan (Forward+); handhelds run it on the Compatibility renderer.
-# SteamDeck=1 makes a new install start on the game's largest text size, which the port mod in
-# mods/ sizes for the screen; the mod also skips the live action cutscenes by default.
-# westonwrap replaces XDG_RUNTIME_DIR; pass the real one on so ALSA can reach PipeWire for sound.
 REAL_XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 $ESUDO env $weston_dir/westonwrap.sh headless noop kiosk crusty_x11egl \
   LD_PRELOAD= ${godot_mapping:+SDL_GAMECONTROLLERCONFIG="$godot_mapping"} XDG_DATA_HOME="$CONFDIR" XDG_RUNTIME_DIR="$REAL_XDG_RUNTIME_DIR" SteamDeck=1 \

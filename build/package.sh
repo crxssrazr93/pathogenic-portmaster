@@ -22,7 +22,10 @@ rm -f "$src/pathogenic/mods/PortMaster-Handheld.zip"
 (cd "$R/mod" && zip -r -q -X "$src/pathogenic/mods/PortMaster-Handheld.zip" mods-unpacked)
 stage=$(mktemp -d)
 trap 'rm -rf "$stage"' EXIT
-cp "$src/Pathogenic.sh" "$stage/"
+# Release zips carry the "# PORTMASTER:" line that PortMaster's own build adds; without it
+# harbourmaster inserts it into the launcher on its first runtime download, even while it runs.
+{ head -n 1 "$src/Pathogenic.sh"; echo "# PORTMASTER: pathogenic.zip, Pathogenic.sh"; tail -n +2 "$src/Pathogenic.sh"; } > "$stage/Pathogenic.sh"
+chmod 755 "$stage/Pathogenic.sh"
 cp -r "$src/pathogenic" "$stage/"
 rm -rf "$stage"/pathogenic/gamedata/*.pck "$stage/pathogenic/cache" "$stage/pathogenic/conf" \
   "$stage/pathogenic/log.txt" "$stage/pathogenic/setup_log.txt" \
