@@ -163,11 +163,32 @@ godot_joy_mapping() {
 }
 
 godot_mapping=""
+# control.txt always fills sdl_controllerconfig; only some firmwares also export
+# SDL_GAMECONTROLLERCONFIG (dArkOS does not). The list can hold several pads (Knulli puts an
+# Xbox pad first), so take the line whose GUID matches a pad that is present, else the first line.
+pad_guid_present() {
+  local guid="${1%%,*}" ev id
+  le16() { local v=$((16#$(cat "$1" 2>/dev/null || echo 0))); printf '%02x%02x' $((v & 255)) $((v >> 8 & 255)); }
+  for ev in /sys/class/input/event*/device; do
+    [ -d "$ev/id" ] && ls -d "$ev"/js* >/dev/null 2>&1 || continue
+    id="$(le16 "$ev/id/bustype")0000$(le16 "$ev/id/vendor")0000$(le16 "$ev/id/product")0000$(le16 "$ev/id/version")0000"
+    [ "${id:0:4}${id:8}" = "${guid:0:4}${guid:8}" ] && return 0
+  done
+  return 1
+}
+pad_mapping=""
+first_mapping=""
+while IFS= read -r line; do
+  [[ "$line" =~ ^[0-9a-fA-F]{32}, ]] || continue
+  [ -n "$first_mapping" ] || first_mapping="$line"
+  if pad_guid_present "$line"; then pad_mapping="$line"; break; fi
+done <<< "${sdl_controllerconfig}"$'\n'"${SDL_GAMECONTROLLERCONFIG}"
+pad_mapping="${pad_mapping:-$first_mapping}"
 while IFS= read -r line; do
   [ -n "$line" ] || continue
   godot_mapping="$(godot_joy_mapping "$line")"
   break
-done <<< "$SDL_GAMECONTROLLERCONFIG"
+done <<< "$pad_mapping"
 godot_mapping="$(printf '%s' "$godot_mapping" | tr ' ' '.')"
 
 if [ "$CFW_NAME" = "muOS" ] && [ -n "$GPTOKEYB2" ]; then
